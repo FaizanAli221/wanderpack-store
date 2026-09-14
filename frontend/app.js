@@ -1,7 +1,10 @@
-// Dynamic API base URL: connects to port 5000 if served by Express or Live Server
-const API_HOST = (window.location.protocol.startsWith('http') && window.location.port === '5000')
-  ? ''
-  : 'http://localhost:5000';
+// Dynamic API base URL: works on Vercel production, local Express (5000), and Live Server (5500)
+const isLocalAltPort = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && window.location.port !== '5000' && window.location.port !== '';
+const isFileProtocol = window.location.protocol === 'file:';
+
+const API_HOST = (isLocalAltPort || isFileProtocol)
+  ? 'http://localhost:5000'
+  : '';
 
 const API_BASE = `${API_HOST}/api/products`;
 const ORDERS_API = `${API_HOST}/api/orders`;
