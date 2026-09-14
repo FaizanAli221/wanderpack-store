@@ -52,30 +52,37 @@ function debounce(fn, delay) {
 }
 
 // -------------------------------------------------------------
-// PAGE NAVIGATION ROUTER (SPA)
+// COMPREHENSIVE SPA ROUTER (All 11 Pages)
 // -------------------------------------------------------------
 const pages = {
   home: document.getElementById('homePage'),
   shop: document.getElementById('homePage'),
   track: document.getElementById('trackPage'),
   about: document.getElementById('aboutPage'),
+  reviews: document.getElementById('reviewsPage'),
+  warranty: document.getElementById('warrantyPage'),
+  corporate: document.getElementById('corporatePage'),
+  faq: document.getElementById('faqPage'),
   contact: document.getElementById('contactPage'),
-  shipping: document.getElementById('shippingPage')
+  shipping: document.getElementById('shippingPage'),
+  privacy: document.getElementById('privacyPage'),
+  terms: document.getElementById('termsPage')
 };
 
-function navigateTo(pageName, subAction) {
+function navigateTo(pageName) {
   state.currentPage = pageName;
 
-  // Hide all pages
-  Object.values(pages).forEach(el => {
+  // Hide all page containers
+  Object.keys(pages).forEach(key => {
+    const el = pages[key];
     if (el) el.classList.add('hidden');
   });
 
-  // Show target page
+  // Show selected page container
   const target = pages[pageName] || pages.home;
   if (target) target.classList.remove('hidden');
 
-  // Update active nav links
+  // Update active state in nav links
   document.querySelectorAll('.nav-link').forEach(link => {
     link.classList.toggle('active', link.dataset.page === pageName);
   });
@@ -83,7 +90,7 @@ function navigateTo(pageName, subAction) {
   // Close mobile drawer if open
   closeMobileMenu();
 
-  // Handle special page actions
+  // Special handling for shop anchor
   if (pageName === 'shop') {
     const shopSec = document.getElementById('shopSection');
     if (shopSec) shopSec.scrollIntoView({ behavior: 'smooth' });
@@ -133,7 +140,7 @@ if (mobileDrawerOverlay) mobileDrawerOverlay.addEventListener('click', closeMobi
 
 
 // -------------------------------------------------------------
-// PRODUCTS & STORE LOGIC
+// PRODUCTS CATALOG & STORE LOGIC
 // -------------------------------------------------------------
 async function fetchProducts() {
   try {
@@ -151,8 +158,8 @@ async function fetchProducts() {
     console.error('API Error:', err);
     emptyState.innerHTML = `
       <div class="p-8 bg-stone-100 rounded-2xl text-gray-700 max-w-md mx-auto text-center">
-        <p class="font-bold text-base text-gray-900">Unable to load products</p>
-        <p class="text-xs mt-1 text-gray-500">Please make sure the backend server is running.</p>
+        <p class="font-bold text-base text-gray-900">Unable to load bags from server</p>
+        <p class="text-xs mt-1 text-gray-500">Please make sure backend server is running.</p>
         <button onclick="initApp()" class="mt-4 bg-blue-900 text-white text-xs font-bold px-5 py-2.5 rounded-full hover:bg-blue-800">Retry Connection</button>
       </div>`;
     emptyState.classList.remove('hidden');
@@ -220,7 +227,7 @@ function renderProducts() {
 }
 
 // -------------------------------------------------------------
-// PRODUCT QUICK-VIEW MODAL (GET /api/products/:id)
+// PRODUCT DETAILS MODAL (GET /api/products/:id)
 // -------------------------------------------------------------
 async function openProductDetails(id) {
   const content = document.getElementById('productModalContent');
@@ -245,13 +252,13 @@ async function openProductDetails(id) {
           </div>
           <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">${p.description}</p>
           <div class="text-xs text-gray-500 flex items-center gap-2">
-            <span>Availability:</span>
-            <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">${p.stock} units in stock</span>
+            <span>Stock Status:</span>
+            <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">${p.stock} units ready to ship</span>
           </div>
           <div class="text-2xl font-black text-gray-900 pt-2">${formatPKR(p.price)}</div>
           <div class="pt-2">
             <button id="modalAddBtn" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-full transition shadow-md text-sm">
-              Add to Cart
+              Add to Shopping Cart
             </button>
           </div>
         </div>
@@ -263,12 +270,12 @@ async function openProductDetails(id) {
       productModal.classList.add('hidden');
     });
   } catch (err) {
-    content.innerHTML = `<p class="text-red-500 text-center py-8 text-sm">Could not load product details from server.</p>`;
+    content.innerHTML = `<p class="text-red-500 text-center py-8 text-sm">Could not load product details.</p>`;
   }
 }
 
 // -------------------------------------------------------------
-// CART MANAGEMENT
+// CART OPERATIONS
 // -------------------------------------------------------------
 function addToCart(id) {
   const product = state.products.find(p => p.id === id);
@@ -303,7 +310,7 @@ function renderCart() {
       <div class="text-center py-16 text-gray-400">
         <div class="text-4xl mb-2">🛍</div>
         <p class="text-sm font-medium">Your shopping cart is empty.</p>
-        <button onclick="closeCartFn(); navigateTo('shop');" class="mt-4 bg-gray-900 text-white text-xs font-bold px-5 py-2 rounded-full hover:bg-blue-900">Explore Bags</button>
+        <button onclick="closeCartFn(); navigateTo('shop');" class="mt-4 bg-gray-900 text-white text-xs font-bold px-5 py-2 rounded-full hover:bg-blue-900">Browse Store</button>
       </div>`;
   } else {
     cartItemsEl.innerHTML = state.cart.map(i => `
@@ -340,10 +347,10 @@ function closeCartFn() {
 }
 
 // -------------------------------------------------------------
-// CHECKOUT & ORDERS (POST /api/orders)
+// CHECKOUT & COD ORDERS (POST /api/orders)
 // -------------------------------------------------------------
 function openCheckout() {
-  if (state.cart.length === 0) return alert('Your cart is empty. Please add some bags first.');
+  if (state.cart.length === 0) return alert('Your cart is empty. Please add bags to checkout.');
   closeCartFn();
 
   const subtotal = state.cart.reduce((s, i) => s + i.price * i.qty, 0);
@@ -398,19 +405,17 @@ async function handleOrderSubmit(e) {
 
     state.lastPlacedOrderId = result.orderId;
 
-    // Show order success view
     document.getElementById('checkoutFormView').classList.add('hidden');
     document.getElementById('orderSuccessView').classList.remove('hidden');
     document.getElementById('successOrderId').textContent = result.orderId;
 
-    // Clear cart
     state.cart = [];
     persistCart();
     renderCart();
     orderForm.reset();
   } catch (err) {
-    console.error('Order Submission Error:', err);
-    errorEl.textContent = `Order Error: ${err.message}. Please check connection.`;
+    console.error('Order Error:', err);
+    errorEl.textContent = `Order Error: ${err.message}.`;
     errorEl.classList.remove('hidden');
   } finally {
     submitBtn.disabled = false;
@@ -434,12 +439,9 @@ async function trackOrderById(orderId) {
 
   try {
     const res = await fetch(`${ORDERS_API}/${encodeURIComponent(orderId)}`);
-    if (!res.ok) {
-      throw new Error('Order ID not found in system. Please verify your order number.');
-    }
+    if (!res.ok) throw new Error('Order ID not found. Please verify your reference number.');
     const order = await res.json();
 
-    // Populate Tracking Data
     document.getElementById('trackResultId').textContent = order.orderId;
     document.getElementById('trackResultStatus').textContent = order.status || 'Confirmed';
     document.getElementById('trackCustomerName').textContent = order.customer.name || 'Valued Customer';
@@ -473,7 +475,6 @@ if (trackOrderForm) {
   });
 }
 
-// Button in checkout modal to track immediately
 const trackMyOrderBtn = document.getElementById('trackMyOrderBtn');
 if (trackMyOrderBtn) {
   trackMyOrderBtn.addEventListener('click', () => {
@@ -486,14 +487,34 @@ if (trackMyOrderBtn) {
 }
 
 // -------------------------------------------------------------
-// CONTACT FORM
+// INTERACTIVE FORMS & ACCORDIONS
 // -------------------------------------------------------------
+// FAQ Accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const isActive = item.classList.contains('active');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+    if (!isActive) item.classList.add('active');
+  });
+});
+
+// Contact Form
 const inquiryForm = document.getElementById('inquiryForm');
 if (inquiryForm) {
   inquiryForm.addEventListener('submit', (e) => {
     e.preventDefault();
     document.getElementById('inquirySuccessMsg').classList.remove('hidden');
     inquiryForm.reset();
+  });
+}
+
+// Corporate & School Bulk Quote Form
+const bulkQuoteForm = document.getElementById('bulkQuoteForm');
+if (bulkQuoteForm) {
+  bulkQuoteForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('bulkSuccessMsg').classList.remove('hidden');
+    bulkQuoteForm.reset();
   });
 }
 
