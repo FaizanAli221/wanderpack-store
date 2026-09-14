@@ -15,9 +15,12 @@ const state = {
   category: 'All',
   search: '',
   sort: 'featured',
-  cart: JSON.parse(localStorage.getItem('wp_cart') || '[]')
+  cart: JSON.parse(localStorage.getItem('wp_cart') || '[]'),
+  currentPage: 'home',
+  lastPlacedOrderId: ''
 };
 
+// DOM Elements
 const productGrid = document.getElementById('productGrid');
 const emptyState = document.getElementById('emptyState');
 const categoryPills = document.getElementById('categoryPills');
@@ -34,6 +37,11 @@ const orderForm = document.getElementById('orderForm');
 const productModal = document.getElementById('productModal');
 const closeProductModal = document.getElementById('closeProductModal');
 
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const mobileDrawerOverlay = document.getElementById('mobileDrawerOverlay');
+const closeMobileDrawer = document.getElementById('closeMobileDrawer');
+
 function formatPKR(amount) {
   return 'Rs. ' + Number(amount).toLocaleString('en-PK');
 }
@@ -43,38 +51,90 @@ function debounce(fn, delay) {
   return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), delay); };
 }
 
-// Backend Health Check
-async function checkBackendHealth() {
-  const banner = document.getElementById('connectionBanner');
-  const badge = document.getElementById('apiStatusBadge');
-  const hostLabel = document.getElementById('apiHostLabel');
-  if (hostLabel) hostLabel.textContent = API_HOST || 'localhost:5000';
+// -------------------------------------------------------------
+// PAGE NAVIGATION ROUTER (SPA)
+// -------------------------------------------------------------
+const pages = {
+  home: document.getElementById('homePage'),
+  shop: document.getElementById('homePage'),
+  track: document.getElementById('trackPage'),
+  about: document.getElementById('aboutPage'),
+  contact: document.getElementById('contactPage'),
+  shipping: document.getElementById('shippingPage')
+};
 
-  try {
-    const res = await fetch(HEALTH_API, { method: 'GET', cache: 'no-cache' });
-    if (res.ok) {
-      if (banner) banner.classList.add('hidden');
-      if (badge) {
-        badge.classList.remove('hidden');
-        badge.className = "hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800";
-        badge.innerHTML = '<span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span> API Connected';
-      }
-      return true;
-    }
-  } catch (err) {
-    // backend is offline
-  }
+function navigateTo(pageName, subAction) {
+  state.currentPage = pageName;
 
-  if (banner) banner.classList.remove('hidden');
-  if (badge) {
-    badge.classList.remove('hidden');
-    badge.className = "hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800";
-    badge.innerHTML = '<span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span> API Offline';
+  // Hide all pages
+  Object.values(pages).forEach(el => {
+    if (el) el.classList.add('hidden');
+  });
+
+  // Show target page
+  const target = pages[pageName] || pages.home;
+  if (target) target.classList.remove('hidden');
+
+  // Update active nav links
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.toggle('active', link.dataset.page === pageName);
+  });
+
+  // Close mobile drawer if open
+  closeMobileMenu();
+
+  // Handle special page actions
+  if (pageName === 'shop') {
+    const shopSec = document.getElementById('shopSection');
+    if (shopSec) shopSec.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-  return false;
 }
 
-// Fetch products from backend GET /api/products
+function handleHashChange() {
+  const hash = window.location.hash.replace('#', '').toLowerCase();
+  if (hash && pages[hash]) {
+    navigateTo(hash);
+  } else {
+    navigateTo('home');
+  }
+}
+
+window.addEventListener('hashchange', handleHashChange);
+
+document.querySelectorAll('.nav-target').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const page = link.dataset.page;
+    const cat = link.dataset.category;
+    if (cat) {
+      state.category = cat;
+      loadCategories();
+      fetchProducts();
+      navigateTo('shop');
+    } else if (page) {
+      navigateTo(page);
+    }
+  });
+});
+
+// Mobile Drawer controls
+function openMobileMenu() {
+  mobileDrawer.classList.remove('-translate-x-full');
+  mobileDrawerOverlay.classList.remove('hidden');
+}
+function closeMobileMenu() {
+  mobileDrawer.classList.add('-translate-x-full');
+  mobileDrawerOverlay.classList.add('hidden');
+}
+if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileMenu);
+if (closeMobileDrawer) closeMobileDrawer.addEventListener('click', closeMobileMenu);
+if (mobileDrawerOverlay) mobileDrawerOverlay.addEventListener('click', closeMobileMenu);
+
+
+// -------------------------------------------------------------
+// PRODUCTS & STORE LOGIC
+// -------------------------------------------------------------
 async function fetchProducts() {
   try {
     const params = new URLSearchParams();
@@ -90,17 +150,15 @@ async function fetchProducts() {
   } catch (err) {
     console.error('API Error:', err);
     emptyState.innerHTML = `
-      <div class="p-6 bg-red-50 border border-red-200 rounded-xl text-red-700 max-w-md mx-auto">
-        <p class="font-bold">⚠️ Backend Server Disconnected</p>
-        <p class="text-xs mt-1 text-red-600">Could not fetch products from <code class="font-mono bg-red-100 px-1 rounded">${API_BASE}</code>.</p>
-        <p class="text-xs mt-1 text-gray-600">Run <code class="font-mono bg-gray-200 px-1 rounded">npm start</code> in terminal, then click below to retry.</p>
-        <button onclick="initApp()" class="mt-3 bg-red-700 hover:bg-red-800 text-white text-xs px-4 py-2 rounded-full">Retry Connection</button>
+      <div class="p-8 bg-stone-100 rounded-2xl text-gray-700 max-w-md mx-auto text-center">
+        <p class="font-bold text-base text-gray-900">Unable to load products</p>
+        <p class="text-xs mt-1 text-gray-500">Please make sure the backend server is running.</p>
+        <button onclick="initApp()" class="mt-4 bg-blue-900 text-white text-xs font-bold px-5 py-2.5 rounded-full hover:bg-blue-800">Retry Connection</button>
       </div>`;
     emptyState.classList.remove('hidden');
   }
 }
 
-// Fetch categories from backend GET /api/products/categories
 async function loadCategories() {
   try {
     const res = await fetch(`${API_BASE}/categories`);
@@ -124,58 +182,28 @@ async function loadCategories() {
   }
 }
 
-// Fetch single product details from backend GET /api/products/:id
-async function openProductDetails(id) {
-  const content = document.getElementById('productModalContent');
-  productModal.classList.remove('hidden');
-  content.innerHTML = '<div class="py-12 text-center text-gray-500 text-sm">Loading product details from backend...</div>';
-
-  try {
-    const res = await fetch(`${API_BASE}/${id}`);
-    if (!res.ok) throw new Error('Product not found');
-    const p = await res.json();
-    content.innerHTML = `
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
-        <img src="${p.image}" alt="${p.name}" class="w-full aspect-square rounded-xl object-cover bg-stone-100">
-        <div class="space-y-3">
-          <span class="text-xs uppercase tracking-wider font-semibold text-blue-800 bg-blue-50 px-2.5 py-1 rounded-full">${p.category}</span>
-          <h3 class="text-xl font-bold text-gray-900">${p.name}</h3>
-          <div class="text-sm text-amber-500 font-medium">
-            ${'★'.repeat(Math.round(p.rating))}${'☆'.repeat(5 - Math.round(p.rating))} 
-            <span class="text-gray-400">(${p.rating} / 5.0)</span>
-          </div>
-          <p class="text-sm text-gray-600 leading-relaxed">${p.description}</p>
-          <div class="text-xs text-gray-500">In Stock: <span class="font-bold text-emerald-700">${p.stock} units available</span></div>
-          <div class="text-2xl font-black text-gray-900 pt-2">${formatPKR(p.price)}</div>
-          <button id="modalAddBtn" class="w-full bg-blue-800 hover:bg-blue-900 text-white font-medium py-2.5 rounded-full transition shadow">
-            Add to Cart
-          </button>
-        </div>
-      </div>
-    `;
-
-    document.getElementById('modalAddBtn').addEventListener('click', () => {
-      addToCart(p.id);
-      productModal.classList.add('hidden');
-    });
-  } catch (err) {
-    content.innerHTML = `<p class="text-red-500 text-center py-6 text-sm">Could not load product details from server.</p>`;
-  }
-}
-
 function renderProducts() {
-  resultCount.textContent = `${state.products.length} products`;
+  resultCount.textContent = `${state.products.length} products available`;
   emptyState.classList.toggle('hidden', state.products.length > 0);
 
   productGrid.innerHTML = state.products.map(p => `
-    <div class="product-card border border-gray-200 rounded-xl p-3 bg-white hover:shadow-lg transition-shadow">
-      <img src="${p.image}" alt="${p.name}" class="product-img mb-3 cursor-pointer" data-view-id="${p.id}">
-      <div class="text-xs text-gray-500 mb-1">${p.category}</div>
-      <div class="text-sm font-semibold line-clamp-2 mb-1 cursor-pointer hover:text-blue-800" data-view-id="${p.id}">${p.name}</div>
-      <div class="text-xs text-amber-500 mb-2">${'★'.repeat(Math.round(p.rating))}${'☆'.repeat(5 - Math.round(p.rating))} <span class="text-gray-400">(${p.rating})</span></div>
-      <div class="flex items-center justify-between mt-auto pt-2">
-        <span class="font-bold text-gray-900">${formatPKR(p.price)}</span>
-        <button class="add-btn text-xs bg-gray-900 text-white px-3 py-2 rounded-full hover:bg-blue-800" data-id="${p.id}">Add</button>
+    <div class="product-card border border-gray-200 rounded-2xl p-3 sm:p-4 bg-white hover:shadow-xl transition-all flex flex-col">
+      <div class="overflow-hidden rounded-xl bg-stone-100 mb-3 cursor-pointer" data-view-id="${p.id}">
+        <img src="${p.image}" alt="${p.name}" class="product-img w-full aspect-square object-cover" loading="lazy">
+      </div>
+      <div class="text-[11px] font-bold uppercase tracking-wider text-blue-800 mb-1">${p.category}</div>
+      <h3 class="text-xs sm:text-sm font-bold text-gray-900 line-clamp-2 mb-1 cursor-pointer hover:text-blue-900" data-view-id="${p.id}">
+        ${p.name}
+      </h3>
+      <div class="text-xs text-amber-500 mb-3 flex items-center gap-1">
+        <span>${'★'.repeat(Math.round(p.rating))}${'☆'.repeat(5 - Math.round(p.rating))}</span>
+        <span class="text-gray-400 text-[11px]">(${p.rating})</span>
+      </div>
+      <div class="flex items-center justify-between mt-auto pt-2 border-t border-gray-100">
+        <span class="font-extrabold text-sm sm:text-base text-gray-900">${formatPKR(p.price)}</span>
+        <button class="add-btn text-xs bg-gray-950 text-white font-semibold px-3.5 py-1.5 rounded-full hover:bg-blue-900 transition" data-id="${p.id}">
+          + Add
+        </button>
       </div>
     </div>
   `).join('');
@@ -191,6 +219,57 @@ function renderProducts() {
   });
 }
 
+// -------------------------------------------------------------
+// PRODUCT QUICK-VIEW MODAL (GET /api/products/:id)
+// -------------------------------------------------------------
+async function openProductDetails(id) {
+  const content = document.getElementById('productModalContent');
+  productModal.classList.remove('hidden');
+  content.innerHTML = '<div class="py-16 text-center text-gray-400 text-sm">Loading authentic product details...</div>';
+
+  try {
+    const res = await fetch(`${API_BASE}/${id}`);
+    if (!res.ok) throw new Error('Product not found');
+    const p = await res.json();
+    content.innerHTML = `
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+        <div class="rounded-xl overflow-hidden bg-stone-100 shadow-sm">
+          <img src="${p.image}" alt="${p.name}" class="w-full aspect-square object-cover">
+        </div>
+        <div class="space-y-3">
+          <span class="text-xs uppercase tracking-wider font-bold text-blue-900 bg-blue-50 px-2.5 py-1 rounded-full">${p.category}</span>
+          <h3 class="text-lg sm:text-xl font-black text-gray-900 leading-snug">${p.name}</h3>
+          <div class="text-sm text-amber-500 font-medium">
+            ${'★'.repeat(Math.round(p.rating))}${'☆'.repeat(5 - Math.round(p.rating))} 
+            <span class="text-gray-400 text-xs">(${p.rating} / 5.0 Rating)</span>
+          </div>
+          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">${p.description}</p>
+          <div class="text-xs text-gray-500 flex items-center gap-2">
+            <span>Availability:</span>
+            <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">${p.stock} units in stock</span>
+          </div>
+          <div class="text-2xl font-black text-gray-900 pt-2">${formatPKR(p.price)}</div>
+          <div class="pt-2">
+            <button id="modalAddBtn" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-full transition shadow-md text-sm">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('modalAddBtn').addEventListener('click', () => {
+      addToCart(p.id);
+      productModal.classList.add('hidden');
+    });
+  } catch (err) {
+    content.innerHTML = `<p class="text-red-500 text-center py-8 text-sm">Could not load product details from server.</p>`;
+  }
+}
+
+// -------------------------------------------------------------
+// CART MANAGEMENT
+// -------------------------------------------------------------
 function addToCart(id) {
   const product = state.products.find(p => p.id === id);
   if (!product) return;
@@ -220,17 +299,22 @@ function renderCart() {
   cartCount.textContent = totalQty;
 
   if (state.cart.length === 0) {
-    cartItemsEl.innerHTML = `<p class="text-gray-500 text-sm text-center mt-10">Your cart is empty.</p>`;
+    cartItemsEl.innerHTML = `
+      <div class="text-center py-16 text-gray-400">
+        <div class="text-4xl mb-2">🛍</div>
+        <p class="text-sm font-medium">Your shopping cart is empty.</p>
+        <button onclick="closeCartFn(); navigateTo('shop');" class="mt-4 bg-gray-900 text-white text-xs font-bold px-5 py-2 rounded-full hover:bg-blue-900">Explore Bags</button>
+      </div>`;
   } else {
     cartItemsEl.innerHTML = state.cart.map(i => `
-      <div class="flex gap-3 items-center">
-        <img src="${i.image}" class="w-16 h-16 rounded-lg object-cover bg-gray-100">
-        <div class="flex-1">
-          <div class="text-sm font-medium line-clamp-2">${i.name}</div>
-          <div class="text-sm text-gray-500">${formatPKR(i.price)}</div>
-          <div class="flex items-center gap-2 mt-1">
+      <div class="flex gap-3 items-center border-b border-gray-100 pb-3">
+        <img src="${i.image}" class="w-16 h-16 rounded-xl object-cover bg-stone-100 shrink-0">
+        <div class="flex-1 min-w-0">
+          <div class="text-xs sm:text-sm font-bold text-gray-900 truncate">${i.name}</div>
+          <div class="text-xs text-blue-900 font-extrabold mt-0.5">${formatPKR(i.price)}</div>
+          <div class="flex items-center gap-2 mt-2">
             <button class="qty-btn" data-id="${i.id}" data-delta="-1">-</button>
-            <span class="text-sm font-medium">${i.qty}</span>
+            <span class="text-xs font-bold px-1">${i.qty}</span>
             <button class="qty-btn" data-id="${i.id}" data-delta="1">+</button>
           </div>
         </div>
@@ -250,15 +334,16 @@ function openCart() {
   cartDrawer.classList.add('open');
   cartOverlay.classList.remove('hidden');
 }
-
 function closeCartFn() {
   cartDrawer.classList.remove('open');
   cartOverlay.classList.add('hidden');
 }
 
-// Checkout & Order Placement (POST /api/orders)
+// -------------------------------------------------------------
+// CHECKOUT & ORDERS (POST /api/orders)
+// -------------------------------------------------------------
 function openCheckout() {
-  if (state.cart.length === 0) return alert('Your cart is empty.');
+  if (state.cart.length === 0) return alert('Your cart is empty. Please add some bags first.');
   closeCartFn();
 
   const subtotal = state.cart.reduce((s, i) => s + i.price * i.qty, 0);
@@ -268,7 +353,7 @@ function openCheckout() {
 
   document.getElementById('checkoutItemCount').textContent = count;
   document.getElementById('checkoutSubtotal').textContent = formatPKR(subtotal);
-  document.getElementById('checkoutShipping').textContent = shipping === 0 ? 'FREE' : formatPKR(shipping);
+  document.getElementById('checkoutShipping').textContent = shipping === 0 ? 'FREE (Special Offer)' : formatPKR(shipping);
   document.getElementById('checkoutTotal').textContent = formatPKR(total);
 
   document.getElementById('checkoutErrorMsg').classList.add('hidden');
@@ -295,7 +380,7 @@ async function handleOrderSubmit(e) {
   };
 
   submitBtn.disabled = true;
-  submitBtn.textContent = 'Submitting Order to Server...';
+  submitBtn.textContent = 'Processing Cash on Delivery Order...';
 
   try {
     const res = await fetch(ORDERS_API, {
@@ -311,6 +396,8 @@ async function handleOrderSubmit(e) {
     const result = await res.json();
     if (!res.ok) throw new Error(result.error || 'Failed to place order');
 
+    state.lastPlacedOrderId = result.orderId;
+
     // Show order success view
     document.getElementById('checkoutFormView').classList.add('hidden');
     document.getElementById('orderSuccessView').classList.remove('hidden');
@@ -323,7 +410,7 @@ async function handleOrderSubmit(e) {
     orderForm.reset();
   } catch (err) {
     console.error('Order Submission Error:', err);
-    errorEl.textContent = `Order Error: ${err.message}. Please check backend server.`;
+    errorEl.textContent = `Order Error: ${err.message}. Please check connection.`;
     errorEl.classList.remove('hidden');
   } finally {
     submitBtn.disabled = false;
@@ -331,7 +418,88 @@ async function handleOrderSubmit(e) {
   }
 }
 
-// Event Listeners
+// -------------------------------------------------------------
+// LIVE ORDER TRACKING (GET /api/orders/:id)
+// -------------------------------------------------------------
+const trackOrderForm = document.getElementById('trackOrderForm');
+const trackOrderIdInput = document.getElementById('trackOrderIdInput');
+const trackingResult = document.getElementById('trackingResult');
+const trackErrorMsg = document.getElementById('trackErrorMsg');
+
+async function trackOrderById(orderId) {
+  if (!orderId) return;
+  trackOrderIdInput.value = orderId;
+  trackErrorMsg.classList.add('hidden');
+  trackingResult.classList.add('hidden');
+
+  try {
+    const res = await fetch(`${ORDERS_API}/${encodeURIComponent(orderId)}`);
+    if (!res.ok) {
+      throw new Error('Order ID not found in system. Please verify your order number.');
+    }
+    const order = await res.json();
+
+    // Populate Tracking Data
+    document.getElementById('trackResultId').textContent = order.orderId;
+    document.getElementById('trackResultStatus').textContent = order.status || 'Confirmed';
+    document.getElementById('trackCustomerName').textContent = order.customer.name || 'Valued Customer';
+    document.getElementById('trackCustomerPhone').textContent = `Phone: ${order.customer.phone || 'N/A'}`;
+    document.getElementById('trackCustomerAddress').textContent = `Delivery: ${order.customer.address}, ${order.customer.city}`;
+    document.getElementById('trackOrderTotal').textContent = formatPKR(order.total);
+
+    const itemsContainer = document.getElementById('trackItemsList');
+    itemsContainer.innerHTML = (order.items || []).map(item => `
+      <div class="flex items-center gap-3 py-1">
+        <img src="${item.image}" class="w-10 h-10 rounded-lg object-cover bg-stone-100">
+        <div class="flex-1 text-xs">
+          <span class="font-bold text-gray-900">${item.name}</span>
+          <span class="text-gray-500"> × ${item.qty}</span>
+        </div>
+        <div class="font-extrabold text-xs text-gray-900">${formatPKR(item.price * item.qty)}</div>
+      </div>
+    `).join('');
+
+    trackingResult.classList.remove('hidden');
+  } catch (err) {
+    trackErrorMsg.textContent = err.message;
+    trackErrorMsg.classList.remove('hidden');
+  }
+}
+
+if (trackOrderForm) {
+  trackOrderForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    trackOrderById(trackOrderIdInput.value.trim().toUpperCase());
+  });
+}
+
+// Button in checkout modal to track immediately
+const trackMyOrderBtn = document.getElementById('trackMyOrderBtn');
+if (trackMyOrderBtn) {
+  trackMyOrderBtn.addEventListener('click', () => {
+    closeCheckout();
+    navigateTo('track');
+    if (state.lastPlacedOrderId) {
+      trackOrderById(state.lastPlacedOrderId);
+    }
+  });
+}
+
+// -------------------------------------------------------------
+// CONTACT FORM
+// -------------------------------------------------------------
+const inquiryForm = document.getElementById('inquiryForm');
+if (inquiryForm) {
+  inquiryForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('inquirySuccessMsg').classList.remove('hidden');
+    inquiryForm.reset();
+  });
+}
+
+// -------------------------------------------------------------
+// EVENT LISTENERS & INITIALIZATION
+// -------------------------------------------------------------
 document.getElementById('cartBtn').addEventListener('click', openCart);
 document.getElementById('closeCart').addEventListener('click', closeCartFn);
 cartOverlay.addEventListener('click', closeCartFn);
@@ -342,7 +510,12 @@ document.getElementById('successContinueBtn').addEventListener('click', closeChe
 
 closeProductModal.addEventListener('click', () => productModal.classList.add('hidden'));
 
-const debouncedSearch = debounce((val) => { state.search = val; fetchProducts(); }, 300);
+const debouncedSearch = debounce((val) => { 
+  state.search = val; 
+  navigateTo('shop');
+  fetchProducts(); 
+}, 300);
+
 document.getElementById('searchInput').addEventListener('input', e => debouncedSearch(e.target.value));
 document.getElementById('searchInputMobile').addEventListener('input', e => debouncedSearch(e.target.value));
 
@@ -356,12 +529,12 @@ document.querySelectorAll('.hero-card').forEach(card => {
     state.category = card.dataset.category;
     loadCategories();
     fetchProducts();
-    window.scrollTo({ top: 400, behavior: 'smooth' });
+    navigateTo('shop');
   });
 });
 
 async function initApp() {
-  await checkBackendHealth();
+  handleHashChange();
   await loadCategories();
   await fetchProducts();
   renderCart();
