@@ -1,0 +1,17 @@
+{
+  "name": "wanderpack-store",
+  "version": "1.0.0",
+  "description": "WanderPack E-Commerce Store (Luggage / Backpacks / School Bags)",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^4.22.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

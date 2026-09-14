@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wanderpack | Bags, Backpacks & Luggage</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-stone-50 text-gray-900">
+
+<!-- Announcement bar -->
+<div class="bg-gray-900 text-white text-xs sm:text-sm overflow-hidden whitespace-nowrap">
+  <div class="marquee py-2 flex gap-10">
+    <span>✨ DISCOUNT AUTOMATICALLY APPLIED AT CHECKOUT</span>
+    <span>📦 FREE DELIVERY ON ORDERS OVER RS.5,000</span>
+    <span>🚚 KARACHI 2 HOUR EXPRESS DELIVERY AVAILABLE</span>
+    <span>✨ DISCOUNT AUTOMATICALLY APPLIED AT CHECKOUT</span>
+    <span>📦 FREE DELIVERY ON ORDERS OVER RS.5,000</span>
+    <span>🚚 KARACHI 2 HOUR EXPRESS DELIVERY AVAILABLE</span>
+  </div>
+</div>
+
+<!-- Server connection banner -->
+<div id="connectionBanner" class="hidden bg-amber-500 text-white text-xs sm:text-sm font-medium py-2.5 px-4 text-center">
+  <span>⚠️ Backend API disconnected (<span id="apiHostLabel"></span>). Please ensure the backend is running with <code class="bg-amber-700 px-2 py-0.5 rounded font-mono font-bold">npm start</code>.</span>
+</div>
+
+<!-- Header -->
+<header class="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="text-2xl font-extrabold tracking-tight text-blue-800 cursor-pointer" onclick="location.reload()">WANDER<span class="text-gray-900">PACK</span></div>
+      <span id="apiStatusBadge" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        API Connected
+      </span>
+    </div>
+    <div class="hidden md:flex flex-1 max-w-md relative">
+      <input id="searchInput" type="text" placeholder="Search bags, backpacks, luggage..."
+        class="w-full border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-800">
+    </div>
+    <button id="cartBtn" class="relative flex items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors">
+      🛍 Cart
+      <span id="cartCount" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span>
+    </button>
+  </div>
+  <div class="md:hidden px-4 pb-3">
+    <input id="searchInputMobile" type="text" placeholder="Search bags, backpacks, luggage..."
+      class="w-full border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-800">
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="max-w-7xl mx-auto px-4 py-6">
+  <h1 class="text-center text-xl sm:text-2xl font-bold tracking-wide mb-4">BEST LUGGAGE &amp; BACKPACK STORE</h1>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div class="hero-card" data-category="Luggage">
+      <div class="hero-overlay">
+        <span class="hero-label">Luggage</span>
+        <button class="hero-btn">Shop Now</button>
+      </div>
+    </div>
+    <div class="hero-card" data-category="Travel Bags">
+      <div class="hero-overlay">
+        <span class="hero-label">Travel Bags</span>
+        <button class="hero-btn">Shop Now</button>
+      </div>
+    </div>
+    <div class="hero-card" data-category="School Bags">
+      <div class="hero-overlay">
+        <span class="hero-label">School Bags</span>
+        <button class="hero-btn">Shop Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Filter bar -->
+<section class="max-w-7xl mx-auto px-4 py-4 border-y border-gray-200 flex flex-wrap items-center justify-between gap-3">
+  <div id="categoryPills" class="flex flex-wrap gap-2"></div>
+  <div class="flex items-center gap-3">
+    <span id="resultCount" class="text-sm text-gray-500"></span>
+    <select id="sortSelect" class="border border-gray-300 rounded-md text-sm px-3 py-2">
+      <option value="featured">Sort: Featured</option>
+      <option value="price_asc">Price: Low to High</option>
+      <option value="price_desc">Price: High to Low</option>
+      <option value="rating">Top Rated</option>
+    </select>
+  </div>
+</section>
+
+<!-- Product grid -->
+<main class="max-w-7xl mx-auto px-4 py-8">
+  <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
+  <div id="emptyState" class="hidden text-center text-gray-500 py-16">No products match your search.</div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-gray-300 mt-12">
+  <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-3 gap-8 text-sm">
+    <div>
+      <div class="text-white text-lg font-bold mb-3">WANDERPACK</div>
+      <p>Quality bags, backpacks and luggage for school, travel and everyday adventure.</p>
+    </div>
+    <div>
+      <div class="text-white font-semibold mb-3">Quick Links</div>
+      <ul class="space-y-1">
+        <li>Home</li><li>About Us</li><li>Contact Us</li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-white font-semibold mb-3">Information</div>
+      <ul class="space-y-1">
+        <li>Shipping Policy</li><li>Privacy Policy</li><li>Terms of Service</li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-gray-800 text-center text-xs py-4">© 2026 WANDERPACK. Demo store for portfolio purposes.</div>
+</footer>
+
+<!-- Cart drawer -->
+<div id="cartOverlay" class="hidden fixed inset-0 bg-black/50 z-50"></div>
+<aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white z-50 translate-x-full transition-transform duration-300 flex flex-col">
+  <div class="flex items-center justify-between px-5 py-4 border-b">
+    <h2 class="font-bold text-lg">Your Cart</h2>
+    <button id="closeCart" class="text-2xl leading-none">&times;</button>
+  </div>
+  <div id="cartItems" class="flex-1 overflow-y-auto px-5 py-4 space-y-4"></div>
+  <div class="border-t px-5 py-4 space-y-3">
+    <div class="flex justify-between font-semibold text-base">
+      <span>Subtotal</span>
+      <span id="cartSubtotal">Rs. 0</span>
+    </div>
+    <button id="checkoutBtn" class="w-full bg-blue-800 text-white py-3 rounded-full font-medium hover:bg-blue-900">Checkout</button>
+  </div>
+</aside>
+
+<!-- Checkout Modal -->
+<div id="checkoutModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/60 flex items-center justify-center p-4">
+  <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
+    <div class="px-6 py-4 bg-gray-900 text-white flex items-center justify-between">
+      <div>
+        <h3 class="text-lg font-bold">Complete Your Order</h3>
+        <p class="text-xs text-gray-300">Fast Cash on Delivery across Pakistan</p>
+      </div>
+      <button id="closeCheckoutModal" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
+    </div>
+
+    <!-- Checkout Form View -->
+    <div id="checkoutFormView" class="p-6 space-y-4">
+      <!-- Order Summary snippet -->
+      <div class="bg-stone-100 rounded-xl p-3 text-sm space-y-1">
+        <div class="flex justify-between text-gray-600">
+          <span>Items count:</span>
+          <span id="checkoutItemCount" class="font-medium">0</span>
+        </div>
+        <div class="flex justify-between text-gray-600">
+          <span>Subtotal:</span>
+          <span id="checkoutSubtotal" class="font-medium">Rs. 0</span>
+        </div>
+        <div class="flex justify-between text-gray-600">
+          <span>Delivery (Pakistan):</span>
+          <span id="checkoutShipping" class="font-medium">Rs. 0</span>
+        </div>
+        <div class="flex justify-between font-bold text-gray-900 border-t border-gray-300 pt-1 text-base">
+          <span>Total Payable:</span>
+          <span id="checkoutTotal">Rs. 0</span>
+        </div>
+      </div>
+
+      <form id="orderForm" class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Full Name *</label>
+          <input type="text" id="custName" required placeholder="e.g. Faizan Ali"
+            class="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-800 focus:outline-none">
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">WhatsApp / Phone *</label>
+            <input type="tel" id="custPhone" required placeholder="0300-1234567"
+              class="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-800 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">City *</label>
+            <input type="text" id="custCity" required placeholder="Karachi, Lahore, etc."
+              class="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-800 focus:outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Delivery Address *</label>
+          <textarea id="custAddress" required rows="2" placeholder="House #, Street, Area / Sector..."
+            class="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-800 focus:outline-none"></textarea>
+        </div>
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-2.5 text-xs text-blue-900 flex items-center gap-2">
+          <span>💵</span>
+          <span>Payment Method: <strong>Cash on Delivery (COD)</strong></span>
+        </div>
+        <div id="checkoutErrorMsg" class="hidden text-xs text-red-600 bg-red-50 p-2 rounded border border-red-200"></div>
+        <button type="submit" id="submitOrderBtn" class="w-full bg-blue-800 hover:bg-blue-900 text-white font-medium py-3 rounded-xl transition shadow-md">
+          Confirm &amp; Place Order
+        </button>
+      </form>
+    </div>
+
+    <!-- Order Success View -->
+    <div id="orderSuccessView" class="hidden p-8 text-center space-y-4">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto">
+        ✓
+      </div>
+      <div>
+        <h4 class="text-xl font-bold text-gray-900">Order Placed Successfully!</h4>
+        <p class="text-sm text-gray-600 mt-1">Order ID: <strong id="successOrderId" class="text-blue-800 font-mono"></strong></p>
+      </div>
+      <p class="text-xs text-gray-500 max-w-sm mx-auto">
+        Thank you! Our representative will contact you via WhatsApp/Call to confirm dispatch.
+      </p>
+      <button id="successContinueBtn" class="bg-gray-900 hover:bg-gray-800 text-white px-6 py-2.5 rounded-full text-sm font-medium">
+        Continue Shopping
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Product Details Modal -->
+<div id="productModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/60 flex items-center justify-center p-4">
+  <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden border border-gray-100 relative">
+    <button id="closeProductModal" class="absolute top-3 right-4 text-gray-400 hover:text-gray-700 text-3xl leading-none z-10">&times;</button>
+    <div id="productModalContent" class="p-6">
+      <!-- Populated via API call GET /api/products/:id -->
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
