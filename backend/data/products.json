@@ -51,112 +51,92 @@
   },
   {
     "id": 6,
-    "name": "Modern Compact Daily Grey School Bag",
-    "category": "School Bags",
-    "price": 2490,
-    "rating": 4.7,
-    "stock": 30,
-    "description": "Clean-cut grey commuter daypack featuring dual top handles, spacious main compartment, and front organizing sleeve.",
-    "image": "/images/product-6.jpg"
-  },
-  {
-    "id": 7,
     "name": "Camel Mountain 45L Expedition Backpack",
     "category": "Backpacks",
     "price": 8450,
     "rating": 4.9,
     "stock": 11,
-    "description": "Heavy-duty outdoor trekking backpack with water bottle mesh pocket, carabiner gear loops, and ergonomic hip support.",
-    "image": "/images/product-7.jpg"
+    "description": "Heavy-duty outdoor trekking backpack with water bottle mesh pocket, carabiner gear loops, weather-resistant fabric, and ergonomic hip support.",
+    "image": "/images/product-6.jpg"
   },
   {
-    "id": 8,
-    "name": "Stealth Black Tech Commuter Backpack",
-    "category": "Backpacks",
-    "price": 4500,
-    "rating": 4.6,
-    "stock": 16,
-    "description": "Sleek multi-compartment urban black backpack with reinforced base, padded tablet sleeve, and hidden back pocket.",
-    "image": "/images/product-8.jpg"
-  },
-  {
-    "id": 9,
-    "name": "Casual Canvas Everyday Black School Bag",
-    "category": "School Bags",
-    "price": 3200,
-    "rating": 4.5,
-    "stock": 14,
-    "description": "Classic minimalist black canvas backpack with front zip organizer pocket, comfortable shoulder straps, and durable top handle.",
-    "image": "/images/product-9.jpg"
-  },
-  {
-    "id": 10,
+    "id": 7,
     "name": "Steel Rose Designer Italian Leather Handbag",
     "category": "Travel Bags",
     "price": 8900,
     "rating": 4.8,
     "stock": 8,
     "description": "Luxury coral red Italian leather handbag with polished silver hardware lock, top handle, and adjustable shoulder strap.",
-    "image": "/images/product-10.jpg"
+    "image": "/images/product-7.jpg"
   },
   {
-    "id": 11,
+    "id": 8,
     "name": "Alpine Trail Outdoor Trekking Backpack",
     "category": "Backpacks",
     "price": 5250,
     "rating": 4.6,
     "stock": 13,
     "description": "Rugged outdoor navy camping backpack with sleeping mat attachment straps, side bottle holder, and quick-release buckles.",
-    "image": "/images/product-11.jpg"
+    "image": "/images/product-8.jpg"
   },
   {
-    "id": 12,
+    "id": 9,
     "name": "VINTA Luxury Charcoal Travel Bag",
     "category": "Travel Bags",
     "price": 7250,
     "rating": 4.9,
     "stock": 9,
     "description": "Premium weather-proof charcoal canvas travel bag with magnetic leather strap locks, camera/laptop organizers, and brass logo.",
-    "image": "/images/product-12.jpg"
+    "image": "/images/product-9.jpg"
   },
   {
-    "id": 13,
+    "id": 10,
     "name": "Classic Hardshell Spinner Luggage 24\"",
     "category": "Luggage",
     "price": 12500,
     "rating": 4.9,
     "stock": 8,
     "description": "100% polycarbonate impact-resistant white/silver hardshell suitcase with 360-degree silent spinner wheels and TSA lock.",
-    "image": "/images/product-13.jpg"
+    "image": "/images/product-10.jpg"
   },
   {
-    "id": 14,
+    "id": 11,
     "name": "Executive Travel Hardshell Suitcase Duo",
     "category": "Luggage",
     "price": 14800,
     "rating": 4.8,
     "stock": 6,
     "description": "Durable textured polycarbonate travel suitcases featuring 360-degree silent spinner wheels and top ergonomic handles.",
-    "image": "/images/product-14.jpg"
+    "image": "/images/product-11.jpg"
   },
   {
-    "id": 15,
-    "name": "Chic Coral Leather Travel Shoulder Bag",
+    "id": 12,
+    "name": "Woven Tan Leather Luxury Handbag",
     "category": "Travel Bags",
-    "price": 3900,
-    "rating": 4.3,
-    "stock": 17,
-    "description": "Elegant structured coral leather travel shoulder tote featuring luxury metallic turn-lock and top grab handle.",
-    "image": "/images/product-15.jpg"
+    "price": 9500,
+    "rating": 4.7,
+    "stock": 7,
+    "description": "Handwoven artisan tan leather handbag featuring luxury metallic turn-lock, structured top handle, and soft suede lining.",
+    "image": "/images/product-12.jpg"
   },
   {
-    "id": 16,
-    "name": "Suisse-Win Alpine Expedition Pack",
-    "category": "School Bags",
-    "price": 6850,
-    "rating": 4.7,
-    "stock": 12,
-    "description": "High-durability navy outdoor student pack with sleeping roll straps, heavy-duty side buckles, and water-repellent canvas.",
-    "image": "/images/product-16.jpg"
+    "id": 13,
+    "name": "Airport Commuter Black Trolley Suitcase",
+    "category": "Luggage",
+    "price": 8900,
+    "rating": 4.6,
+    "stock": 14,
+    "description": "Sleek cabin-sized black rolling trolley suitcase with smooth inline wheels, sturdy telescopic handle, and front passport stash pocket.",
+    "image": "/images/product-13.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Luxury Quilted Leather Chain Shoulder Bag",
+    "category": "Travel Bags",
+    "price": 11200,
+    "rating": 4.9,
+    "stock": 5,
+    "description": "Chic black chevron-quilted genuine leather shoulder bag featuring antique gold-tone chain strap and dual zip compartments.",
+    "image": "/images/product-14.jpg"
   }
 ]
