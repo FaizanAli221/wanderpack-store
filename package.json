@@ -7,7 +7,7 @@
     "start": "node backend/server.js",
     "dev": "nodemon backend/server.js",
     "pages:dev": "wrangler pages dev frontend",
-    "pages:deploy": "npx wrangler pages deploy frontend"
+    "pages:deploy": "wrangler pages deploy frontend --project-name wanderpack-store"
   },
   "dependencies": {
     "cors": "^2.8.6",
@@ -15,6 +15,6 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.0",
-    "wrangler": "^3.78.2"
+    "wrangler": "^4.132.0"
   }
 }
