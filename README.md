@@ -37,8 +37,9 @@ This project is fully configured for **Cloudflare Pages & Functions**:
 2. Select your repository: **`wanderpack-store`**.
 3. Set the build settings:
    - **Framework preset**: `None`
-   - **Build command**: *(Leave blank)*
+   - **Build command**: *(Leave blank / empty)*
    - **Build output directory**: `frontend`
+   - **Deploy command**: `npx wrangler pages deploy frontend` *(OR leave blank)*
 4. Click **Save and Deploy**.
 
 Cloudflare automatically handles static asset hosting via its global CDN and executes API routes (`/api/*`) via the serverless Pages Function in `functions/api/[[path]].js`.
