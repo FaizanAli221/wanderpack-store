@@ -1,162 +1,162 @@
 [
   {
     "id": 1,
-    "name": "Adventure-Ready Kids Backpack 14\"",
+    "name": "Modern Andoer Minimalist Grey Daypack 14\"",
     "category": "School Bags",
     "price": 3490,
     "rating": 4.5,
     "stock": 24,
-    "description": "Multi-character series backpack with reinforced straps, padded air-mesh back, and water-resistant fabric built for daily school adventures.",
-    "image": "https://images.unsplash.com/photo-1546938576-6e6a64f317cc?w=600&auto=format&fit=crop&q=80"
+    "description": "Sleek, lightweight grey daypack with dual top carry handles, padded shoulder straps, and front quick-access zipper pocket.",
+    "image": "/images/product-1.jpg"
   },
   {
     "id": 2,
-    "name": "3D Space Astronaut Kids Backpack 1-3 Grade",
-    "category": "School Bags",
+    "name": "Heritage Waxed Canvas & Leather Rucksack",
+    "category": "Backpacks",
     "price": 4250,
-    "rating": 4.3,
+    "rating": 4.8,
     "stock": 18,
-    "description": "Fun astronaut-themed backpack with orthopedic padded shoulder straps, dual water bottle holders, and easy-wipe finish.",
-    "image": "https://images.unsplash.com/photo-1577733966973-d680bffd2e80?w=600&auto=format&fit=crop&q=80"
+    "description": "Handcrafted heavy-duty dark green waxed canvas rucksack with genuine brown leather buckle straps and reinforced base.",
+    "image": "/images/product-2.jpg"
   },
   {
     "id": 3,
-    "name": "Swiss Design 8810 Tech Backpack",
+    "name": "Swiss Tech 15.6\" Matte Black Laptop Backpack",
     "category": "Backpacks",
     "price": 5300,
     "rating": 5.0,
     "stock": 12,
-    "description": "Premium 15.6\" laptop-ready backpack with TSA lock compatibility, hidden anti-theft back pocket, and water-repellent ballistic nylon.",
-    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&auto=format&fit=crop&q=80"
+    "description": "Minimalist matte black tech backpack with hidden anti-theft zipper, padded laptop compartment, and water-repellent nylon.",
+    "image": "/images/product-3.jpg"
   },
   {
     "id": 4,
-    "name": "Kids 3D Character Rolling Trolley School Bag 16\"",
+    "name": "Urban Essential Student Black Backpack",
     "category": "School Bags",
-    "price": 7450,
+    "price": 3890,
     "rating": 4.6,
-    "stock": 9,
-    "description": "Sturdy 6-wheel rolling trolley bag designed for stairs and rough terrain, featuring heavy-duty aluminum handle and 3 large compartments.",
-    "image": "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?w=600&auto=format&fit=crop&q=80"
+    "stock": 15,
+    "description": "Lightweight daily school & college bag with spacious main compartment, front quick-stash zip pocket, and ergonomic padding.",
+    "image": "/images/product-4.jpg"
   },
   {
     "id": 5,
-    "name": "PL-Power Student Laptop Backpack",
+    "name": "Executive Full-Grain Brown Leather Backpack",
     "category": "Backpacks",
-    "price": 4250,
-    "rating": 4.2,
-    "stock": 20,
-    "description": "Dedicated fleece-lined laptop compartment with organizer sleeves for college, university, notebooks, and everyday commuting.",
-    "image": "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=600&auto=format&fit=crop&q=80"
+    "price": 6450,
+    "rating": 4.9,
+    "stock": 10,
+    "description": "Premium genuine brown leather business backpack with front utility pouch, side bottle pockets, and cushioned laptop sleeve.",
+    "image": "/images/product-5.jpg"
   },
   {
     "id": 6,
-    "name": "Cute G.Duck Toddler Backpack 11\"",
+    "name": "Modern Compact Daily Grey School Bag",
     "category": "School Bags",
     "price": 2490,
-    "rating": 4.8,
+    "rating": 4.7,
     "stock": 30,
-    "description": "Ultra-lightweight playgroup backpack crafted from soft breathable neoprene with anti-lost safety harness strap.",
-    "image": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600&auto=format&fit=crop&q=80"
+    "description": "Clean-cut grey commuter daypack featuring dual top handles, spacious main compartment, and front organizing sleeve.",
+    "image": "/images/product-6.jpg"
   },
   {
     "id": 7,
-    "name": "Camel Mountain 20\" Large Expedition Backpack",
+    "name": "Camel Mountain 45L Expedition Backpack",
     "category": "Backpacks",
     "price": 8450,
-    "rating": 4.4,
+    "rating": 4.9,
     "stock": 11,
-    "description": "Extra large 45L capacity tactical backpack with rain cover, trekking pole loops, and heavy load balancing hip belts.",
-    "image": "https://images.unsplash.com/photo-1509762774605-f07235a08f1f?w=600&auto=format&fit=crop&q=80"
+    "description": "Heavy-duty outdoor trekking backpack with water bottle mesh pocket, carabiner gear loops, and ergonomic hip support.",
+    "image": "/images/product-7.jpg"
   },
   {
     "id": 8,
-    "name": "Premium Black Multi-Zip Urban Backpack",
+    "name": "Stealth Black Tech Commuter Backpack",
     "category": "Backpacks",
-    "price": 3890,
-    "rating": 4.1,
+    "price": 4500,
+    "rating": 4.6,
     "stock": 16,
-    "description": "Sleek matte-black multi-zip backpack with reinforced base, quick-access front pouches, and luggage pass-through strap.",
-    "image": "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=600&auto=format&fit=crop&q=80"
+    "description": "Sleek multi-compartment urban black backpack with reinforced base, padded tablet sleeve, and hidden back pocket.",
+    "image": "/images/product-8.jpg"
   },
   {
     "id": 9,
-    "name": "Executive 19\" Laptop Backpack with USB Port",
-    "category": "Backpacks",
-    "price": 5300,
+    "name": "Casual Canvas Everyday Black School Bag",
+    "category": "School Bags",
+    "price": 3200,
     "rating": 4.5,
     "stock": 14,
-    "description": "High-grade business travel backpack with external USB pass-through, sunglasses holder, and 180-degree lay-flat opening.",
-    "image": "https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80"
+    "description": "Classic minimalist black canvas backpack with front zip organizer pocket, comfortable shoulder straps, and durable top handle.",
+    "image": "/images/product-9.jpg"
   },
   {
     "id": 10,
-    "name": "Steel Rose Commuter Travel Backpack",
+    "name": "Steel Rose Designer Italian Leather Handbag",
     "category": "Travel Bags",
-    "price": 3900,
-    "rating": 4.3,
-    "stock": 19,
-    "description": "Compact weekend travel pack with dual insulated bottle pockets, headphone port, and weather-resistant canvas fabric.",
-    "image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&auto=format&fit=crop&q=80"
+    "price": 8900,
+    "rating": 4.8,
+    "stock": 8,
+    "description": "Luxury coral red Italian leather handbag with polished silver hardware lock, top handle, and adjustable shoulder strap.",
+    "image": "/images/product-10.jpg"
   },
   {
     "id": 11,
-    "name": "Suisse-Win Backpack SN-8351",
+    "name": "Alpine Trail Outdoor Trekking Backpack",
     "category": "Backpacks",
     "price": 5250,
-    "rating": 4.0,
+    "rating": 4.6,
     "stock": 13,
-    "description": "Engineered for durability with shock-absorbing shoulder straps, ventilated back panel, and heavy-duty metal zips.",
-    "image": "https://images.unsplash.com/photo-1575844264771-892081089af5?w=600&auto=format&fit=crop&q=80"
+    "description": "Rugged outdoor navy camping backpack with sleeping mat attachment straps, side bottle holder, and quick-release buckles.",
+    "image": "/images/product-11.jpg"
   },
   {
     "id": 12,
-    "name": "Trust-U Heavy-Duty Gym & Weekender Duffel",
+    "name": "VINTA Luxury Charcoal Travel Bag",
     "category": "Travel Bags",
-    "price": 2750,
-    "rating": 4.2,
-    "stock": 22,
-    "description": "Waterproof travel duffel bag with separated ventilated shoe compartment, wet pocket for towels, and removable shoulder strap.",
-    "image": "https://images.unsplash.com/photo-1547949003-9792a18a2601?w=600&auto=format&fit=crop&q=80"
+    "price": 7250,
+    "rating": 4.9,
+    "stock": 9,
+    "description": "Premium weather-proof charcoal canvas travel bag with magnetic leather strap locks, camera/laptop organizers, and brass logo.",
+    "image": "/images/product-12.jpg"
   },
   {
     "id": 13,
-    "name": "Classic Hardshell Luggage 24\" (Rose Gold / Silver)",
+    "name": "Classic Hardshell Spinner Luggage 24\"",
     "category": "Luggage",
     "price": 12500,
-    "rating": 4.7,
+    "rating": 4.9,
     "stock": 8,
-    "description": "100% polycarbonate impact-resistant suitcase with 360-degree silent spinner wheels, TSA custom combination lock, and telescopic alloy handle.",
-    "image": "https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=600&auto=format&fit=crop&q=80"
+    "description": "100% polycarbonate impact-resistant white/silver hardshell suitcase with 360-degree silent spinner wheels and TSA lock.",
+    "image": "/images/product-13.jpg"
   },
   {
     "id": 14,
-    "name": "Executive Softshell Carry-On Suitcase 20\"",
+    "name": "Executive Travel Hardshell Suitcase Duo",
     "category": "Luggage",
-    "price": 9800,
-    "rating": 4.5,
-    "stock": 10,
-    "description": "Ultra-lightweight expandable cabin suitcase made with 1680D nylon, front laptop pocket for easy security screening, and reinforced corner guards.",
-    "image": "https://images.unsplash.com/photo-1581553680321-4fffae59fccd?w=600&auto=format&fit=crop&q=80"
+    "price": 14800,
+    "rating": 4.8,
+    "stock": 6,
+    "description": "Durable textured polycarbonate travel suitcases featuring 360-degree silent spinner wheels and top ergonomic handles.",
+    "image": "/images/product-14.jpg"
   },
   {
     "id": 15,
-    "name": "ZMBaby Kids Cosmic Galaxy Backpack",
-    "category": "School Bags",
-    "price": 4300,
-    "rating": 4.1,
+    "name": "Chic Coral Leather Travel Shoulder Bag",
+    "category": "Travel Bags",
+    "price": 3900,
+    "rating": 4.3,
     "stock": 17,
-    "description": "High-density splash-proof galaxy backpack with night reflective strips, matching pencil case, and ergonomic S-curve straps.",
-    "image": "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=600&auto=format&fit=crop&q=80"
+    "description": "Elegant structured coral leather travel shoulder tote featuring luxury metallic turn-lock and top grab handle.",
+    "image": "/images/product-15.jpg"
   },
   {
     "id": 16,
-    "name": "Stealth Black Edition Rolling School Bag",
+    "name": "Suisse-Win Alpine Expedition Pack",
     "category": "School Bags",
     "price": 6850,
-    "rating": 4.6,
-    "stock": 7,
-    "description": "All-in-one convertible trolley and backpack with padded wheel covers, heavy-grade pull handle, and multi-tier stationery organizers.",
-    "image": "https://images.unsplash.com/photo-1576400883215-7083980b6197?w=600&auto=format&fit=crop&q=80"
+    "rating": 4.7,
+    "stock": 12,
+    "description": "High-durability navy outdoor student pack with sleeping roll straps, heavy-duty side buckles, and water-repellent canvas.",
+    "image": "/images/product-16.jpg"
   }
 ]
