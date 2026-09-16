@@ -5,13 +5,16 @@
   "main": "backend/server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "dev": "nodemon backend/server.js"
+    "dev": "nodemon backend/server.js",
+    "pages:dev": "wrangler pages dev frontend",
+    "pages:deploy": "npx wrangler pages deploy frontend"
   },
   "dependencies": {
     "cors": "^2.8.6",
     "express": "^4.22.3"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "wrangler": "^3.78.2"
   }
 }

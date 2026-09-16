@@ -1,0 +1,7 @@
+name = "wanderpack-store"
+pages_build_output_dir = "frontend"
+compatibility_date = "2024-09-15"
+compatibility_flags = ["nodejs_compat"]
+
+[site]
+bucket = "./frontend"

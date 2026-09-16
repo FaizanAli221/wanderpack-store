@@ -27,6 +27,28 @@ Open **http://localhost:5000** — the Express backend serves both the REST API 
 
 For auto-reload during development: `npm run dev` (powered by `nodemon`).
 
+## Deployment Options
+
+### ⚡ Option 1: Cloudflare Pages Deployment
+
+This project is fully configured for **Cloudflare Pages & Functions**:
+
+1. Log into **[Cloudflare Dashboard](https://dash.cloudflare.com)** -> Go to **Workers & Pages** -> **Create Application** -> **Pages** -> **Connect to Git**.
+2. Select your repository: **`wanderpack-store`**.
+3. Set the build settings:
+   - **Framework preset**: `None`
+   - **Build command**: *(Leave blank)*
+   - **Build output directory**: `frontend`
+4. Click **Save and Deploy**.
+
+Cloudflare automatically handles static asset hosting via its global CDN and executes API routes (`/api/*`) via the serverless Pages Function in `functions/api/[[path]].js`.
+
+### 🚀 Option 2: Deploy via Wrangler CLI
+
+```bash
+npx wrangler pages deploy frontend --project-name wanderpack-store
+```
+
 ## API Documentation
 
 Base URL: `http://localhost:5000`
