@@ -3,7 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wander Packs – WanderPacks is the ultimate destination for the modern Pakistani traveler.</title>
+<title>WanderPacks Pakistan | Premium Backpacks, Laptop Bags & Hardshell Luggage</title>
+<meta name="description" content="Shop heavy-duty backpacks, 15.6&quot; laptop bags, travel duffels, school bags, and 1-year warranty hardshell suitcases across Pakistan. Cash on Delivery nationwide.">
+<link rel="canonical" href="https://wanderpack-store.pages.dev/">
+
+<!-- Open Graph / Social SEO -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wanderpack-store.pages.dev/">
+<meta property="og:title" content="WanderPacks Pakistan | Premium Backpacks & Luggage">
+<meta property="og:description" content="Heavy-duty travel gear engineered for Pakistan. Backpacks, laptop bags, travel duffels & suitcases with 1-year warranty.">
+<meta property="og:image" content="https://wanderpacks.store/wp-content/uploads/2026/05/20.jpg">
+
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,13 +34,13 @@
   </div>
 </div>
 
-<!-- Header (Matching Astra Theme Header) -->
+<!-- Header (Astra Theme Dark Bar) -->
 <header class="sticky top-0 z-40 bg-slate-900 text-white border-b border-slate-800 shadow-md">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
     
-    <!-- Mobile Menu Button & Logo -->
+    <!-- Mobile Menu Button & Brand -->
     <div class="flex items-center gap-3">
-      <button id="mobileMenuBtn" class="lg:hidden text-slate-300 hover:text-white p-1 focus:outline-none" aria-label="Open Menu">
+      <button id="mobileMenuBtn" class="lg:hidden text-slate-300 hover:text-white p-1 focus:outline-none" aria-label="Open Mobile Menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
@@ -40,22 +50,31 @@
       </a>
     </div>
 
-    <!-- Desktop Navigation Links (Home, Shop, About, Contact) -->
-    <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold">
+    <!-- Desktop Navigation Links -->
+    <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold">
       <a href="#home" class="nav-link nav-target active" data-page="home">Home</a>
-      <a href="#shop" class="nav-link nav-target" data-page="shop">Shop</a>
-      <a href="#about" class="nav-link nav-target" data-page="about">About</a>
+      <a href="#shop" class="nav-link nav-target" data-page="shop">Shop All</a>
+      <a href="#about" class="nav-link nav-target" data-page="about">About Us</a>
       <a href="#contact" class="nav-link nav-target" data-page="contact">Contact</a>
-      <a href="#track" class="nav-link nav-target text-slate-400 hover:text-white" data-page="track">Track Order</a>
+      <a href="#track" class="nav-link nav-target text-slate-300 hover:text-white" data-page="track">Track Order</a>
     </nav>
 
-    <!-- Search & Cart Button -->
-    <div class="flex items-center gap-4">
-      <div class="hidden md:flex relative w-48 lg:w-60">
-        <input id="searchInput" type="text" placeholder="Search products..."
+    <!-- Header Actions: Search, Wishlist, Cart -->
+    <div class="flex items-center gap-3">
+      <div class="hidden md:flex relative w-44 lg:w-56">
+        <input id="searchInput" type="text" placeholder="Search backpacks, luggage..."
           class="w-full bg-slate-800 border border-slate-700 rounded-full px-4 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500">
       </div>
-      
+
+      <!-- Wishlist Counter Button -->
+      <button id="wishlistHeaderBtn" class="relative text-slate-300 hover:text-white p-2 focus:outline-none" aria-label="View Wishlist">
+        <svg class="w-6 h-6 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 21.364l-7.682-7.682a4.5 4.5 0 010-6.364z"></path>
+        </svg>
+        <span id="wishlistCount" class="absolute -top-1 -right-1 bg-rose-500 text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">0</span>
+      </button>
+
+      <!-- Cart Button -->
       <button id="cartBtn" class="relative flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-3.5 py-2 rounded-full transition border border-slate-700">
         <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
@@ -68,25 +87,26 @@
 
   <!-- Mobile Search Bar -->
   <div class="md:hidden px-4 pb-3">
-    <input id="searchInputMobile" type="text" placeholder="Search backpacks, luggage, duffels..."
+    <input id="searchInputMobile" type="text" placeholder="Search backpacks, laptop bags, luggage..."
       class="w-full bg-slate-800 border border-slate-700 rounded-full px-4 py-2 text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500">
   </div>
 </header>
 
-<!-- Mobile Drawer Overlay -->
+<!-- Mobile Navigation Drawer -->
 <div id="mobileDrawerOverlay" class="hidden fixed inset-0 bg-black/60 z-50"></div>
 <aside id="mobileDrawer" class="fixed top-0 left-0 h-full w-72 bg-slate-900 text-white z-50 -translate-x-full transition-transform duration-300 flex flex-col p-6 shadow-2xl overflow-y-auto">
   <div class="flex items-center justify-between pb-4 border-b border-slate-800">
     <div class="text-xl font-extrabold heading-font text-white">Wander Packs</div>
     <button id="closeMobileDrawer" class="text-slate-400 hover:text-white text-2xl font-bold">&times;</button>
   </div>
-  <nav class="flex flex-col gap-4 mt-6 text-sm font-semibold">
+  <nav class="flex flex-col gap-3 mt-6 text-sm font-semibold">
     <a href="#home" class="mobile-nav-link nav-target py-2 border-b border-slate-800 flex items-center justify-between text-slate-200 hover:text-white" data-page="home">Home <span>→</span></a>
-    <a href="#shop" class="mobile-nav-link nav-target py-2 border-b border-slate-800 flex items-center justify-between text-slate-200 hover:text-white" data-page="shop">Shop <span>→</span></a>
-    <a href="#about" class="mobile-nav-link nav-target py-2 border-b border-slate-800 flex items-center justify-between text-slate-200 hover:text-white" data-page="about">About <span>→</span></a>
+    <a href="#shop" class="mobile-nav-link nav-target py-2 border-b border-slate-800 flex items-center justify-between text-slate-200 hover:text-white" data-page="shop">Shop All <span>→</span></a>
+    <a href="#about" class="mobile-nav-link nav-target py-2 border-b border-slate-800 flex items-center justify-between text-slate-200 hover:text-white" data-page="about">About Us <span>→</span></a>
     <a href="#contact" class="mobile-nav-link nav-target py-2 border-b border-slate-800 flex items-center justify-between text-slate-200 hover:text-white" data-page="contact">Contact <span>→</span></a>
     <a href="#track" class="mobile-nav-link nav-target py-2 border-b border-slate-800 flex items-center justify-between text-slate-200 hover:text-white" data-page="track">Track Order <span>→</span></a>
     <a href="#warranty" class="mobile-nav-link nav-target py-2 border-b border-slate-800 flex items-center justify-between text-slate-200 hover:text-white" data-page="warranty">1-Year Warranty <span>→</span></a>
+    <a href="#shipping" class="mobile-nav-link nav-target py-2 border-b border-slate-800 flex items-center justify-between text-slate-200 hover:text-white" data-page="shipping">Shipping &amp; Returns <span>→</span></a>
     <a href="#faq" class="mobile-nav-link nav-target py-2 border-b border-slate-800 flex items-center justify-between text-slate-200 hover:text-white" data-page="faq">FAQs <span>→</span></a>
   </nav>
   <div class="mt-auto pt-6 border-t border-slate-800 text-xs text-slate-400 space-y-2">
@@ -100,65 +120,166 @@
 <!-- MAIN CONTENT AREA -->
 <main class="flex-1">
 
-  <!-- ==================== 1. HOME PAGE ==================== -->
+  <!-- ==================== 1. HOMEPAGE ==================== -->
   <div id="homePage" class="page-view">
     
-    <!-- Hero Banner (Matching wanderpacks.store) -->
+    <!-- 1. HERO SECTION -->
     <section class="hero-bg text-white py-20 md:py-28 px-4 text-center">
       <div class="max-w-4xl mx-auto space-y-6">
+        <span class="text-xs font-bold uppercase tracking-widest text-sky-400 bg-sky-950/60 border border-sky-800 px-3.5 py-1 rounded-full">
+          Pakistan's Trusted Travel &amp; Bag Store
+        </span>
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight uppercase heading-font leading-tight">
-          GEAR UP FOR THE UNKNOWN
+          ENGINEERED FOR UNSTOPPABLE JOURNEYS
         </h1>
         <p class="text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-          From the peaks of Gilgit to the streets of Karachi, our packs are built to endure every terrain. Rugged, reliable, and ready for your next story.
+          Premium backpacks, airport-grade hardshell suitcases, and versatile travel duffels built for Pakistan's roads, flights, and daily commutes.
         </p>
-        <div class="pt-4">
-          <a href="#shop" class="nav-target btn-astra-primary" data-page="shop">Shop Now</a>
+        <div class="pt-4 flex flex-wrap gap-4 justify-center">
+          <a href="#shop" class="nav-target btn-astra-primary" data-page="shop" data-category="Backpacks">Shop Backpacks</a>
+          <a href="#shop" class="nav-target btn-astra-outline" data-page="shop" data-category="Suitcases">Explore Luggage</a>
         </div>
       </div>
     </section>
 
-    <!-- Featured Collections Cards -->
+    <!-- 2. FEATURED CATEGORIES (7 Focused Categories) -->
     <section class="max-w-7xl mx-auto px-4 py-12">
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="hero-card" data-category="Luggage">
+      <div class="text-center max-w-xl mx-auto mb-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 heading-font">Explore Collections</h2>
+        <p class="text-xs sm:text-sm text-slate-500 mt-1">Organized travel gear tailored for every trip</p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">
+        <div class="hero-card nav-target cursor-pointer flex-1" data-category="Backpacks">
           <div class="hero-overlay">
-            <span class="hero-label">Hardshell &amp; Cabin Luggage</span>
-            <button class="hero-btn">Shop Luggage</button>
+            <span class="hero-label text-xs sm:text-sm">Backpacks</span>
           </div>
         </div>
-        <div class="hero-card" data-category="Travel Bags">
+        <div class="hero-card nav-target cursor-pointer flex-1" data-category="Laptop Bags">
           <div class="hero-overlay">
-            <span class="hero-label">Travel &amp; Gym Duffels</span>
-            <button class="hero-btn">Shop Travel</button>
+            <span class="hero-label text-xs sm:text-sm">Laptop Bags</span>
           </div>
         </div>
-        <div class="hero-card" data-category="School Bags">
+        <div class="hero-card nav-target cursor-pointer flex-1" data-category="Travel Duffels">
           <div class="hero-overlay">
-            <span class="hero-label">Kids &amp; School Series</span>
-            <button class="hero-btn">Shop School</button>
+            <span class="hero-label text-xs sm:text-sm">Travel Duffels</span>
+          </div>
+        </div>
+        <div class="hero-card nav-target cursor-pointer flex-1" data-category="Cabin Luggage">
+          <div class="hero-overlay">
+            <span class="hero-label text-xs sm:text-sm">Cabin Luggage</span>
+          </div>
+        </div>
+        <div class="hero-card nav-target cursor-pointer flex-1" data-category="Suitcases">
+          <div class="hero-overlay">
+            <span class="hero-label text-xs sm:text-sm">Suitcases</span>
+          </div>
+        </div>
+        <div class="hero-card nav-target cursor-pointer flex-1" data-category="School Bags">
+          <div class="hero-overlay">
+            <span class="hero-label text-xs sm:text-sm">School Bags</span>
+          </div>
+        </div>
+        <div class="hero-card nav-target cursor-pointer flex-1 col-span-2 sm:col-span-1" data-category="Travel Accessories">
+          <div class="hero-overlay">
+            <span class="hero-label text-xs sm:text-sm">Accessories</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- New Arrivals Header & Filter Bar -->
-    <section id="shopSection" class="max-w-7xl mx-auto px-4 pt-4 pb-6">
-      <div class="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-slate-200 pb-4">
+    <!-- 3. BEST SELLERS SHOWCASE -->
+    <section class="max-w-7xl mx-auto px-4 py-8">
+      <div class="flex items-center justify-between mb-6 border-b border-slate-200 pb-3">
         <div>
-          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 heading-font">New Arrivals</h2>
-          <p class="text-xs sm:text-sm text-slate-500 mt-1">Explore our latest high-durability travel gear &amp; backpacks</p>
+          <h2 class="text-2xl font-bold text-slate-900 heading-font">Best Sellers</h2>
+          <p class="text-xs text-slate-500">Top-rated customer favorites in Pakistan</p>
         </div>
-        <a href="#shop" class="nav-target text-xs font-bold uppercase tracking-wider text-slate-900 hover:text-sky-600 border border-slate-900 px-5 py-2.5 rounded transition" data-page="shop">Shop now</a>
+        <a href="#shop" class="nav-target text-xs font-bold uppercase tracking-wider text-slate-900 hover:text-sky-600 border border-slate-900 px-4 py-2 rounded transition" data-page="shop">View All</a>
+      </div>
+      <div id="bestSellersGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-4"></div>
+    </section>
+
+    <!-- 4. WHY WANDERPACK (TRUST FEATURES) -->
+    <section class="bg-slate-900 text-white py-14 px-4 my-8 border-y border-slate-800">
+      <div class="max-w-7xl mx-auto text-center mb-10">
+        <h2 class="text-2xl sm:text-3xl font-bold heading-font">Why WanderPack</h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">Built to endure every Pakistani road, flight, and trek</p>
+      </div>
+      <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+        <div class="bg-slate-800/80 p-6 rounded-xl border border-slate-700/80 space-y-3">
+          <div class="text-3xl">🛡️</div>
+          <h3 class="font-bold text-sm text-white heading-font uppercase tracking-wider">1680D Waterproof Fabric</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">High-density ballistic nylon and ripstop fabrics tested against heavy rain, dust, and daily wear.</p>
+        </div>
+        <div class="bg-slate-800/80 p-6 rounded-xl border border-slate-700/80 space-y-3">
+          <div class="text-3xl">🎒</div>
+          <h3 class="font-bold text-sm text-white heading-font uppercase tracking-wider">Orthopedic Support</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">Breathable S-curve shoulder straps and honeycomb spine padding designed for comfortable weight distribution.</p>
+        </div>
+        <div class="bg-slate-800/80 p-6 rounded-xl border border-slate-700/80 space-y-3">
+          <div class="text-3xl">🧳</div>
+          <h3 class="font-bold text-sm text-white heading-font uppercase tracking-wider">1-Year Warranty</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">Full hardware warranty covering trolley handles, silent spinner wheels, TSA locks, and zippers.</p>
+        </div>
+        <div class="bg-slate-800/80 p-6 rounded-xl border border-slate-700/80 space-y-3">
+          <div class="text-3xl">💵</div>
+          <h3 class="font-bold text-sm text-white heading-font uppercase tracking-wider">Cash on Delivery</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">Pay cash directly to the courier rider upon delivery at your door across 250+ Pakistani cities.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. TRAVEL COLLECTION (SHOP SECTION WITH ADVANCED FILTERS) -->
+    <section id="shopSection" class="max-w-7xl mx-auto px-4 py-8">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 heading-font">Travel Collection</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Filter by category, price, availability, or sale items</p>
+        </div>
+        <button id="mobileFilterToggleBtn" class="lg:hidden btn-astra-outline text-slate-900 border-slate-900 text-xs py-2 px-4">
+          ⚙️ Filter Products
+        </button>
       </div>
 
-      <!-- Filter Pills & Sorting -->
-      <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
-        <div id="categoryPills" class="flex flex-wrap gap-2"></div>
+      <!-- Category Pills Bar -->
+      <div id="categoryPills" class="flex flex-wrap gap-2 mb-6 overflow-x-auto pb-2"></div>
+
+      <!-- Filter & Controls Bar -->
+      <div class="bg-white border border-slate-200 rounded-xl p-4 mb-6 shadow-sm flex flex-wrap items-center justify-between gap-4">
+        
+        <!-- Filter Controls (Desktop & Mobile Panel) -->
+        <div class="flex flex-wrap items-center gap-4 text-xs">
+          
+          <!-- Price Range Filter -->
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-slate-700">Max Price:</span>
+            <input type="number" id="maxPriceInput" placeholder="Rs. Max" class="w-24 border border-slate-300 rounded px-2.5 py-1.5 focus:ring-1 focus:ring-slate-900 text-xs">
+          </div>
+
+          <!-- Availability Checkbox -->
+          <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-slate-700">
+            <input type="checkbox" id="inStockCheck" class="rounded text-slate-900 focus:ring-slate-900">
+            <span>In Stock Only</span>
+          </label>
+
+          <!-- On Sale Checkbox -->
+          <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-slate-700">
+            <input type="checkbox" id="onSaleCheck" class="rounded text-slate-900 focus:ring-slate-900">
+            <span>On Sale Only</span>
+          </label>
+
+          <button id="resetFiltersBtn" class="text-slate-500 hover:text-slate-900 underline font-semibold text-xs ml-2">
+            Reset
+          </button>
+        </div>
+
+        <!-- Sorting & Product Count -->
         <div class="flex items-center gap-3 ml-auto">
-          <span id="resultCount" class="text-xs sm:text-sm text-slate-500 font-medium"></span>
-          <select id="sortSelect" class="border border-slate-300 rounded text-xs sm:text-sm px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-slate-900">
+          <span id="resultCount" class="text-xs font-semibold text-slate-500"></span>
+          <select id="sortSelect" class="border border-slate-300 rounded text-xs px-3 py-1.5 bg-white focus:outline-none focus:ring-1 focus:ring-slate-900 font-semibold">
             <option value="featured">Sort: Featured</option>
+            <option value="newest">Sort: Newest</option>
             <option value="price_asc">Price: Low to High</option>
             <option value="price_desc">Price: High to Low</option>
             <option value="rating">Top Rated</option>
@@ -166,127 +287,153 @@
         </div>
       </div>
 
-      <!-- Product Grid -->
+      <!-- Main Product Grid -->
       <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
-      <div id="emptyState" class="hidden text-center text-slate-500 py-16">
-        No products match your current selection.
+      <div id="emptyState" class="hidden text-center text-slate-500 py-16 bg-white rounded-xl border border-slate-200">
+        <p class="font-bold text-slate-800">No products match your current filters.</p>
+        <button id="emptyStateResetBtn" class="mt-3 btn-astra-primary text-xs py-2 px-4">Reset Filters</button>
       </div>
     </section>
 
-    <!-- Banner 1: Built to Outlast the Elements -->
-    <section class="bg-slate-900 text-white py-16 px-4 my-12 border-y border-slate-800">
-      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-        <div class="rounded-xl overflow-hidden shadow-2xl">
-          <img src="https://wanderpacks.store/wp-content/uploads/2026/05/20.jpg" alt="Built to Outlast the Elements" class="w-full h-auto object-cover max-h-[500px]" onerror="this.src='https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop&q=80'">
-        </div>
-        <div class="space-y-6">
-          <span class="text-xs font-bold uppercase tracking-widest text-sky-400">Our Heritage &amp; Quality</span>
-          <h2 class="text-3xl sm:text-4xl font-bold heading-font leading-tight">Built to Outlast the Elements</h2>
-          <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
-            Wander Packs is more than a gear store; it is your partner in exploration. Based in Islamabad, we specialize in high-durability equipment designed specifically for the diverse landscapes of Pakistan. Our packs feature reinforced stitching, weather-resistant fabrics, and ergonomic weight distribution to ensure you focus on the view, not your load. We believe that good gear should never be the reason you stop—it should be the reason you keep going.
-          </p>
-          <div>
-            <a href="#shop" class="nav-target btn-astra-outline" data-page="shop">view collection</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Banner 2: THE HORIZON IS CALLING -->
-    <section class="bg-slate-950 text-white py-16 px-4 text-center">
-      <div class="max-w-3xl mx-auto space-y-5">
-        <h2 class="text-3xl sm:text-4xl font-extrabold uppercase heading-font tracking-tight">THE HORIZON IS CALLING</h2>
-        <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-          From the rugged peaks of the North to the bustling streets of the South, our gear is engineered to be your most reliable travel partner across every inch of Pakistan.
-        </p>
-        <div>
-          <a href="#shop" class="nav-target btn-astra-primary" data-page="shop">buy now</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Customer Testimonials Section -->
-    <section class="max-w-7xl mx-auto px-4 py-16">
-      <div class="text-center max-w-xl mx-auto mb-12">
-        <h2 class="text-3xl font-bold text-slate-900 heading-font">What Our Customers Say</h2>
-        <p class="text-slate-500 text-sm mt-2">Verified purchase feedback from Pakistani travelers</p>
+    <!-- 6. CUSTOMER REVIEWS (Labeled clearly as Sample Customer Feedback) -->
+    <section class="max-w-7xl mx-auto px-4 py-12 border-t border-slate-200">
+      <div class="text-center max-w-xl mx-auto mb-10">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-600 bg-slate-100 px-3 py-1 rounded-full">Customer Feedback</span>
+        <h2 class="text-3xl font-bold text-slate-900 mt-2 heading-font">What Travelers Say</h2>
+        <p class="text-xs text-slate-500 mt-1">Sample customer reviews &amp; buyer feedback</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        
-        <div class="bg-white border border-slate-200 rounded-xl p-8 shadow-sm space-y-4">
-          <div class="text-amber-400 text-lg">★★★★★</div>
-          <p class="text-slate-700 text-sm sm:text-base italic leading-relaxed">
-            "Took my WanderPack to Fairy Meadows. It handled the rain and the weight like a pro. The load distribution is the best I've experienced."
+        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-3">
+          <div class="text-amber-400 text-sm">★★★★★</div>
+          <p class="text-slate-700 text-sm italic leading-relaxed">
+            "Took my WanderPack to Fairy Meadows. It handled the rain and heavy weight like a pro. The load distribution is the best I've experienced."
           </p>
-          <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
-            <span class="font-bold text-slate-900 text-sm">Bilal K.</span>
-            <span class="text-xs text-emerald-600 font-semibold">Verified Traveler</span>
+          <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="font-bold text-slate-900">Bilal K.</span>
+            <span class="text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded">Sample Review</span>
           </div>
         </div>
 
-        <div class="bg-white border border-slate-200 rounded-xl p-8 shadow-sm space-y-4">
-          <div class="text-amber-400 text-lg">★★★★★</div>
-          <p class="text-slate-700 text-sm sm:text-base italic leading-relaxed">
-            "The Urban Nomad bag is perfect for my daily commute in Karachi. It's stylish enough for meetings but tough enough for the bus."
+        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-3">
+          <div class="text-amber-400 text-sm">★★★★★</div>
+          <p class="text-slate-700 text-sm italic leading-relaxed">
+            "The Swiss Tech bag is perfect for my daily commute in Karachi. It's stylish enough for office meetings but tough enough for public transit."
           </p>
-          <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
-            <span class="font-bold text-slate-900 text-sm">Zainab R.</span>
-            <span class="text-xs text-emerald-600 font-semibold">Verified Buyer</span>
+          <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="font-bold text-slate-900">Zainab R.</span>
+            <span class="text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded">Sample Review</span>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- Pre-Footer Value Props Bar (Matching reference site) -->
+    <!-- 7. WARRANTY & SERVICE OVERVIEW -->
+    <section id="warranty" class="bg-stone-100 py-12 px-4 my-8 border-y border-stone-200">
+      <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl border border-stone-300 shadow-sm space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="text-3xl">🛡️</div>
+          <div>
+            <h3 class="text-xl font-bold text-slate-900 heading-font">1-Year Limited Hardware Warranty</h3>
+            <p class="text-xs text-slate-500">Official coverage on all WanderPack luggage hardware</p>
+          </div>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          All WanderPack hardshell suitcases and carry-on luggage come with a 1-year warranty covering trolley pull handles, 360° spinner wheels, TSA locks, and zippers. For claims, contact customer helpline <strong>03212212321</strong> or email <strong>support@wanderpack.pk</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. FAQ ACCORDION -->
+    <section id="faq" class="max-w-4xl mx-auto px-4 py-12">
+      <div class="text-center max-w-xl mx-auto mb-10">
+        <h2 class="text-3xl font-bold text-slate-900 heading-font">Frequently Asked Questions</h2>
+        <p class="text-xs text-slate-500 mt-1">Delivery, locks, and order guidelines in Pakistan</p>
+      </div>
+      <div class="space-y-3" id="faqAccordion">
+        <div class="faq-item bg-white border border-slate-200 rounded-xl p-5 shadow-sm cursor-pointer active">
+          <div class="flex items-center justify-between font-bold text-slate-900 text-sm">
+            <span>How do I set the 3-digit TSA lock code on my suitcase?</span>
+            <span class="faq-icon text-slate-400 text-xs font-bold transition-transform">▼</span>
+          </div>
+          <div class="faq-answer text-xs text-slate-600 leading-relaxed">
+            Default code is 0-0-0. Hold the latch open, scroll the 3 dials to your secret combination, and release the latch.
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-slate-200 rounded-xl p-5 shadow-sm cursor-pointer">
+          <div class="flex items-center justify-between font-bold text-slate-900 text-sm">
+            <span>How does Cash on Delivery (COD) work across Pakistan?</span>
+            <span class="faq-icon text-slate-400 text-xs font-bold transition-transform">▼</span>
+          </div>
+          <div class="faq-answer text-xs text-slate-600 leading-relaxed">
+            No advance payment needed. Place your order online and hand cash to the courier rider upon delivery at your door.
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-slate-200 rounded-xl p-5 shadow-sm cursor-pointer">
+          <div class="flex items-center justify-between font-bold text-slate-900 text-sm">
+            <span>What are the delivery timelines for Karachi versus other cities?</span>
+            <span class="faq-icon text-slate-400 text-xs font-bold transition-transform">▼</span>
+          </div>
+          <div class="faq-answer text-xs text-slate-600 leading-relaxed">
+            Karachi express dispatch takes 24-48 hours. Nationwide courier delivery (Lahore, Islamabad, Rawalpindi, etc.) takes 2 to 4 working days via TCS / Trax.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. NEWSLETTER SUBSCRIPTION -->
+    <section class="bg-slate-900 text-white py-14 px-4 text-center">
+      <div class="max-w-xl mx-auto space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-bold heading-font">Join the WanderPack Club</h2>
+        <p class="text-xs sm:text-sm text-slate-300">Subscribe for exclusive travel gear drops, discount vouchers, and sales.</p>
+        <form id="newsletterForm" class="flex gap-2 max-w-md mx-auto pt-2">
+          <input type="email" id="newsletterEmail" required placeholder="Enter your email address..." class="flex-1 bg-slate-800 border border-slate-700 rounded px-4 py-2.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-sky-500">
+          <button type="submit" class="btn-astra-primary text-xs py-2.5 px-5">Subscribe</button>
+        </form>
+        <div id="newsletterMsg" class="hidden text-xs bg-emerald-950 text-emerald-300 p-2.5 rounded border border-emerald-800 font-medium max-w-md mx-auto"></div>
+      </div>
+    </section>
+
+    <!-- 10. PRE-FOOTER BADGES -->
     <section class="pre-footer-bar border-t border-slate-200">
       <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        
         <div class="flex flex-col items-center gap-3">
-          <div class="w-12 h-12 rounded-full border-2 border-slate-900 flex items-center justify-center text-slate-900 text-xl font-bold">
-            💳
-          </div>
+          <div class="w-12 h-12 rounded-full border-2 border-slate-900 flex items-center justify-center text-slate-900 text-xl font-bold">💳</div>
           <h4 class="font-bold text-slate-900 text-sm uppercase tracking-wider heading-font">Easy Payment</h4>
           <p class="text-xs text-slate-500">Cash on Delivery &amp; Bank Transfer Available</p>
         </div>
-
         <div class="flex flex-col items-center gap-3">
           <a href="#track" class="nav-target flex flex-col items-center gap-3 group" data-page="track">
-            <div class="w-12 h-12 rounded-full border-2 border-slate-900 flex items-center justify-center text-slate-900 text-xl font-bold group-hover:bg-slate-900 group-hover:text-white transition">
-              📍
-            </div>
+            <div class="w-12 h-12 rounded-full border-2 border-slate-900 flex items-center justify-center text-slate-900 text-xl font-bold group-hover:bg-slate-900 group-hover:text-white transition">📍</div>
             <h4 class="font-bold text-slate-900 text-sm uppercase tracking-wider heading-font group-hover:text-sky-600 transition">Track Order</h4>
-            <p class="text-xs text-slate-500">Real-time Live Courier Tracking</p>
+            <p class="text-xs text-slate-500">Demo Order Tracking Flow</p>
           </a>
         </div>
-
         <div class="flex flex-col items-center gap-3">
           <a href="#contact" class="nav-target flex flex-col items-center gap-3 group" data-page="contact">
-            <div class="w-12 h-12 rounded-full border-2 border-slate-900 flex items-center justify-center text-slate-900 text-xl font-bold group-hover:bg-slate-900 group-hover:text-white transition">
-              ❓
-            </div>
+            <div class="w-12 h-12 rounded-full border-2 border-slate-900 flex items-center justify-center text-slate-900 text-xl font-bold group-hover:bg-slate-900 group-hover:text-white transition">❓</div>
             <h4 class="font-bold text-slate-900 text-sm uppercase tracking-wider heading-font group-hover:text-sky-600 transition">Have Questions?</h4>
-            <p class="text-xs text-slate-500">Contact our 24/7 Helpline Team</p>
+            <p class="text-xs text-slate-500">Contact Helpline 03212212321</p>
           </a>
         </div>
-
       </div>
     </section>
 
   </div>
 
 
-  <!-- ==================== 2. TRACK ORDER PAGE ==================== -->
+  <!-- ==================== 2. DEMO ORDER TRACKING PAGE ==================== -->
   <div id="trackPage" class="page-view hidden max-w-4xl mx-auto px-4 py-12">
     <div class="text-center mb-8">
       <span class="text-xs font-bold uppercase tracking-wider text-slate-900 bg-slate-100 px-3 py-1 rounded-full">Order Tracking</span>
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-2 heading-font">Track Your Order Live</h2>
-      <p class="text-sm text-slate-500 mt-1 max-w-md mx-auto">Enter your Order ID (e.g. WP-XXXXXX) to view live courier status.</p>
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-2 heading-font">Order Tracking Flow</h2>
+      <p class="text-xs text-slate-500 mt-1 max-w-md mx-auto">
+        <strong>Demo Note:</strong> Test with sample Order ID <button id="trySampleOrderBtn" class="text-sky-600 font-mono font-bold underline">WP-DEMO101</button> or any newly placed order ID.
+      </p>
     </div>
 
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sm:p-8 max-w-xl mx-auto">
       <form id="trackOrderForm" class="flex gap-2">
-        <input type="text" id="trackOrderIdInput" required placeholder="Enter Order ID (e.g. WP-XXXXXX)"
+        <input type="text" id="trackOrderIdInput" required placeholder="Enter Order ID (e.g. WP-DEMO101)"
           class="flex-1 border border-slate-300 rounded px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 uppercase font-mono">
         <button type="submit" id="trackSubmitBtn" class="btn-astra-primary">
           Track
@@ -330,7 +477,7 @@
 
       <div class="border-t border-slate-200 pt-6 grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
         <div>
-          <h4 class="font-bold text-slate-900 mb-2">Recipient Information</h4>
+          <h4 class="font-bold text-slate-900 mb-2">Recipient Details</h4>
           <p id="trackCustomerName" class="font-medium text-slate-800"></p>
           <p id="trackCustomerPhone" class="text-slate-600 text-xs mt-0.5"></p>
           <p id="trackCustomerAddress" class="text-slate-600 text-xs mt-0.5"></p>
@@ -349,9 +496,9 @@
   <div id="aboutPage" class="page-view hidden max-w-5xl mx-auto px-4 py-12">
     <div class="text-center max-w-2xl mx-auto mb-12">
       <span class="text-xs font-bold uppercase tracking-wider text-slate-900 bg-slate-100 px-3 py-1 rounded-full">About Wander Packs</span>
-      <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mt-2 heading-font">Built to Outlast the Elements</h2>
+      <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mt-2 heading-font">Built for Exploration</h2>
       <p class="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
-        Wander Packs is the ultimate destination for the modern Pakistani traveler. We specialize in high-durability backpacks, versatile duffels, and essential travel organizers designed to withstand everything from Northern Area treks to urban commutes.
+        WanderPacks specializes in high-durability backpacks, versatile travel duffels, 15.6" laptop bags, and essential travel organizers designed to withstand everything from Northern Area treks to daily urban commutes.
       </p>
     </div>
 
@@ -359,35 +506,34 @@
       <img src="https://wanderpacks.store/wp-content/uploads/2026/05/20.jpg" alt="Wander Packs Journey" class="rounded-xl shadow-lg w-full aspect-4/3 object-cover" onerror="this.src='https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop&q=80'">
       <div class="space-y-6 text-slate-700 text-sm leading-relaxed">
         <p>
-          Based in Islamabad with flagship operations in Karachi and Rawalpindi, our collection focuses on ergonomic design and weather-resistant materials, ensuring your gear stays protected no matter the destination.
+          Headquartered with operations in Rawalpindi and dispatch points serving Karachi, Lahore, and nationwide, our collection focuses on ergonomic design and weather-resistant materials, ensuring your gear stays protected no matter the destination.
         </p>
         <p>
-          Our packs feature reinforced stitching, weather-resistant fabrics, and ergonomic weight distribution to ensure you focus on the view, not your load. We believe that good gear should never be the reason you stop—it should be the reason you keep going.
+          Our packs feature reinforced stitching, weather-resistant fabrics, and ergonomic weight distribution to ensure you focus on the view, not your load.
         </p>
       </div>
     </div>
   </div>
 
 
-  <!-- ==================== 4. CONTACT PAGE ==================== -->
+  <!-- ==================== 4. CONTACT PAGE (Enforced Consistent Info) ==================== -->
   <div id="contactPage" class="page-view hidden max-w-5xl mx-auto px-4 py-12">
     <div class="text-center max-w-xl mx-auto mb-10">
-      <span class="text-xs font-bold uppercase tracking-wider text-slate-900 bg-slate-100 px-3 py-1 rounded-full">Customer Care</span>
+      <span class="text-xs font-bold uppercase tracking-wider text-slate-900 bg-slate-100 px-3 py-1 rounded-full">Customer Support</span>
       <h2 class="text-3xl font-bold text-slate-900 mt-2 heading-font">Contact Us</h2>
-      <p class="text-slate-500 text-sm mt-1">We are here to assist you with inquiries, orders, and support.</p>
+      <p class="text-slate-500 text-sm mt-1">Get in touch with our team for inquiries and support.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
       <div class="bg-white p-6 rounded-xl border border-slate-200 text-center shadow-sm">
         <div class="text-3xl mb-2">📍</div>
-        <h4 class="font-bold text-slate-900 text-sm heading-font">Our Address</h4>
-        <p class="text-xs text-slate-600 mt-1">Sweets Bakery, Near Mazar, Rawalpindi.</p>
-        <p class="text-xs text-slate-500 mt-0.5">Flagship Store: PECHS, Karachi</p>
+        <h4 class="font-bold text-slate-900 text-sm heading-font">Address</h4>
+        <p class="text-xs text-slate-600 mt-1">Sweets Bakery, Near Mazar, Rawalpindi, Pakistan.</p>
       </div>
 
       <div class="bg-white p-6 rounded-xl border border-slate-200 text-center shadow-sm">
         <div class="text-3xl mb-2">✉️</div>
-        <h4 class="font-bold text-slate-900 text-sm heading-font">Email Us</h4>
+        <h4 class="font-bold text-slate-900 text-sm heading-font">Email Support</h4>
         <p class="text-xs font-semibold text-slate-900 mt-1">business@wanderpacks.store</p>
         <p class="text-xs text-slate-500 mt-0.5">support@wanderpack.pk</p>
       </div>
@@ -400,7 +546,6 @@
       </div>
     </div>
 
-    <!-- Contact Form -->
     <div class="bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-sm max-w-2xl mx-auto">
       <h3 class="text-lg font-bold text-slate-900 mb-4 heading-font">Send Us a Message</h3>
       <form id="inquiryForm" class="space-y-4">
@@ -420,39 +565,56 @@
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">Message *</label>
-          <textarea required rows="4" placeholder="How can we help you?" class="w-full text-sm border border-slate-300 rounded px-3 py-2 focus:ring-2 focus:ring-slate-900 focus:outline-none"></textarea>
+          <textarea required rows="4" placeholder="How can we assist you?" class="w-full text-sm border border-slate-300 rounded px-3 py-2 focus:ring-2 focus:ring-slate-900 focus:outline-none"></textarea>
         </div>
         <div id="inquirySuccessMsg" class="hidden text-xs bg-emerald-50 text-emerald-800 p-3 rounded border border-emerald-200 text-center font-medium">
-          Thank you! Your message has been received. We will get back to you shortly.
+          Thank you! Your inquiry has been submitted. We will get back to you shortly.
         </div>
-        <button type="submit" class="btn-astra-primary w-full sm:w-auto">
-          Send Message
-        </button>
+        <button type="submit" class="btn-astra-primary w-full sm:w-auto">Send Message</button>
       </form>
     </div>
   </div>
 
 
-  <!-- ==================== 5. PRIVACY POLICY PAGE ==================== -->
+  <!-- ==================== 5. SHIPPING & RETURNS PAGE ==================== -->
+  <div id="shippingPage" class="page-view hidden max-w-4xl mx-auto px-4 py-12">
+    <div class="text-center max-w-lg mx-auto mb-10">
+      <span class="text-xs font-bold uppercase tracking-wider text-slate-900 bg-slate-100 px-3 py-1 rounded-full">Shipping Guidelines</span>
+      <h2 class="text-3xl font-bold text-slate-900 mt-2 heading-font">Shipping &amp; Return Policy</h2>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 space-y-4 text-sm text-slate-700 leading-relaxed shadow-sm">
+      <h3 class="font-bold text-slate-900 text-base">Delivery Guidelines</h3>
+      <p>• <strong>Free Nationwide Delivery:</strong> On all order subtotals over Rs. 5,000 across Pakistan.</p>
+      <p>• <strong>Flat Courier Fee:</strong> Rs. 250 fee applies for orders below Rs. 5,000.</p>
+      <p>• <strong>Timelines:</strong> Karachi express delivery in 24-48 hours. TCS / Trax courier delivery in 2-4 working days for Lahore, Islamabad, Rawalpindi, and all other cities.</p>
+      <div class="border-t border-slate-200 pt-4">
+        <h3 class="font-bold text-slate-900 text-base">7-Day Exchange Policy</h3>
+        <p>If you wish to exchange a bag for a different model or color, contact helpline <strong>03212212321</strong> within 7 days of delivery.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== 6. PRIVACY POLICY PAGE ==================== -->
   <div id="privacyPage" class="page-view hidden max-w-4xl mx-auto px-4 py-12">
     <div class="text-center max-w-lg mx-auto mb-10">
       <span class="text-xs font-bold uppercase tracking-wider text-slate-900 bg-slate-100 px-3 py-1 rounded-full">Legal Notice</span>
       <h2 class="text-3xl font-bold text-slate-900 mt-2 heading-font">Privacy Policy</h2>
     </div>
-    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 space-y-4 text-sm text-slate-700 leading-relaxed">
+    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 space-y-4 text-sm text-slate-700 leading-relaxed shadow-sm">
       <h3 class="font-bold text-slate-900 text-base">Privacy Guidelines</h3>
-      <p>Wander Packs respects your privacy. We collect customer names, phone numbers, and delivery addresses solely for order processing and courier fulfillment across Pakistan. Your information will never be shared or sold to third parties.</p>
+      <p>Wander Packs respects your privacy. We collect customer names, phone numbers, and delivery addresses solely for order fulfillment across Pakistan. Your information will never be shared or sold to third parties.</p>
     </div>
   </div>
 
 
-  <!-- ==================== 6. TERMS & CONDITIONS PAGE ==================== -->
+  <!-- ==================== 7. TERMS & CONDITIONS PAGE ==================== -->
   <div id="termsPage" class="page-view hidden max-w-4xl mx-auto px-4 py-12">
     <div class="text-center max-w-lg mx-auto mb-10">
       <span class="text-xs font-bold uppercase tracking-wider text-slate-900 bg-slate-100 px-3 py-1 rounded-full">Legal Notice</span>
       <h2 class="text-3xl font-bold text-slate-900 mt-2 heading-font">Terms &amp; Conditions</h2>
     </div>
-    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 space-y-4 text-sm text-slate-700 leading-relaxed">
+    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 space-y-4 text-sm text-slate-700 leading-relaxed shadow-sm">
       <h3 class="font-bold text-slate-900 text-base">Terms of Service</h3>
       <p>All prices listed on Wander Packs are in Pakistani Rupees (PKR) and include applicable taxes. Cash on Delivery orders require telephone verification prior to dispatch.</p>
     </div>
@@ -460,7 +622,7 @@
 
 </main>
 
-<!-- Footer (Matching wanderpacks.store) -->
+<!-- Footer -->
 <footer class="bg-slate-950 text-slate-400 text-sm border-t border-slate-900">
   <div class="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
     
@@ -469,35 +631,39 @@
       <h4 class="text-white font-bold uppercase tracking-wider text-sm mb-4 heading-font">Quick Links</h4>
       <ul class="space-y-2.5 text-xs font-medium">
         <li><a href="#home" class="nav-target hover:text-white transition" data-page="home">Home</a></li>
-        <li><a href="#about" class="nav-target hover:text-white transition" data-page="about">About</a></li>
+        <li><a href="#about" class="nav-target hover:text-white transition" data-page="about">About Us</a></li>
         <li><a href="#contact" class="nav-target hover:text-white transition" data-page="contact">Contact</a></li>
-        <li><a href="#shop" class="nav-target hover:text-white transition" data-page="shop">Shop</a></li>
+        <li><a href="#shop" class="nav-target hover:text-white transition" data-page="shop">Shop All Bags</a></li>
+        <li><a href="#track" class="nav-target hover:text-white transition" data-page="track">Track Order</a></li>
       </ul>
     </div>
 
-    <!-- Column 2: Categories / Policies -->
+    <!-- Column 2: Policies -->
     <div>
-      <h4 class="text-white font-bold uppercase tracking-wider text-sm mb-4 heading-font">Categories</h4>
+      <h4 class="text-white font-bold uppercase tracking-wider text-sm mb-4 heading-font">Policies &amp; Info</h4>
       <ul class="space-y-2.5 text-xs font-medium">
+        <li><a href="#shipping" class="nav-target hover:text-white transition" data-page="shipping">Shipping &amp; Delivery</a></li>
+        <li><a href="#shipping" class="nav-target hover:text-white transition" data-page="shipping">Return &amp; Refund Policy</a></li>
+        <li><a href="#warranty" class="nav-target hover:text-white transition" data-page="warranty">1-Year Hardware Warranty</a></li>
         <li><a href="#privacy" class="nav-target hover:text-white transition" data-page="privacy">Privacy Policy</a></li>
         <li><a href="#terms" class="nav-target hover:text-white transition" data-page="terms">Terms &amp; Conditions</a></li>
-        <li><a href="#shipping" class="nav-target hover:text-white transition" data-page="shipping">Return &amp; Refund Policy</a></li>
+        <li><a href="#faq" class="nav-target hover:text-white transition" data-page="faq">FAQs</a></li>
       </ul>
     </div>
 
-    <!-- Column 3: Contact Info -->
+    <!-- Column 3: Contact Info (Consistent Info) -->
     <div>
-      <h4 class="text-white font-bold uppercase tracking-wider text-sm mb-4 heading-font">Contact</h4>
-      <p class="text-xs text-slate-300 leading-relaxed">
-        Sweets Bakery, Near Mazar, Rawalpindi.<br>
-        <span class="text-sky-400">business@wanderpacks.store</span><br>
-        Helpline / WhatsApp: <a href="https://wa.me/923212212321" target="_blank" rel="noopener noreferrer" class="text-white underline hover:text-emerald-400 font-semibold">03212212321</a>
+      <h4 class="text-white font-bold uppercase tracking-wider text-sm mb-4 heading-font">Customer Care</h4>
+      <p class="text-xs text-slate-300 leading-relaxed space-y-1">
+        <span>📍 Sweets Bakery, Near Mazar, Rawalpindi.</span><br>
+        <span class="text-sky-400">✉️ business@wanderpacks.store</span><br>
+        <span>📞 Helpline / WhatsApp: </span>
+        <a href="https://wa.me/923212212321" target="_blank" rel="noopener noreferrer" class="text-white underline hover:text-emerald-400 font-semibold">03212212321</a>
       </p>
     </div>
 
   </div>
 
-  <!-- Footer Bottom Bar -->
   <div class="border-t border-slate-900 max-w-7xl mx-auto px-4 py-6 text-center text-xs text-slate-500">
     <p>© 2026 Wander Packs. Powered by smartaxistech.online</p>
   </div>
@@ -528,7 +694,7 @@
       <span>Subtotal</span>
       <span id="cartSubtotal" class="font-bold">Rs. 0</span>
     </div>
-    <p class="text-[11px] text-slate-500">Free delivery nationwide on orders above Rs. 5,000</p>
+    <p class="text-[11px] text-slate-500">Free nationwide delivery over Rs. 5,000</p>
     <button id="checkoutBtn" class="btn-astra-primary w-full">
       Proceed to Checkout
     </button>
@@ -602,16 +768,14 @@
 
     <!-- Success View -->
     <div id="orderSuccessView" class="hidden p-8 text-center space-y-4">
-      <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto font-bold">
-        ✓
-      </div>
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto font-bold">✓</div>
       <div>
         <h4 class="text-2xl font-bold text-slate-900 heading-font">Order Placed Successfully!</h4>
         <p class="text-sm text-slate-600 mt-2">Your Tracking Order ID:</p>
         <div id="successOrderId" class="text-xl text-slate-900 font-mono font-bold mt-1 select-all bg-sky-50 py-1.5 px-4 rounded border border-sky-200 inline-block"></div>
       </div>
       <p class="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
-        Save this Order ID! You can track your shipment anytime in the <strong>Track Order</strong> section.
+        Save this Order ID! You can test the tracking flow anytime in the <strong>Track Order</strong> section.
       </p>
       <div class="flex gap-2 justify-center pt-2">
         <button id="trackMyOrderBtn" class="btn-astra-primary text-xs py-2 px-4">
@@ -625,11 +789,11 @@
   </div>
 </div>
 
-<!-- Product Details Modal -->
+<!-- Detailed Product Modal -->
 <div id="productModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/70 flex items-center justify-center p-4">
-  <div class="bg-white w-full max-w-xl rounded-xl shadow-2xl overflow-hidden border border-slate-100 relative">
+  <div class="bg-white w-full max-w-3xl rounded-xl shadow-2xl overflow-hidden border border-slate-100 relative">
     <button id="closeProductModal" class="absolute top-3.5 right-4 text-slate-400 hover:text-slate-700 text-3xl leading-none z-10">&times;</button>
-    <div id="productModalContent" class="p-6"></div>
+    <div id="productModalContent" class="p-6 sm:p-8"></div>
   </div>
 </div>
 
